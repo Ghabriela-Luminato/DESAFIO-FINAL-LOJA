@@ -1023,11 +1023,10 @@ a {
 
   font-size: 16px;
   font-weight: 600;
-  background: #fff;
   padding: 6px 12px;
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.3s;
+ 
 }
 
 .linha1 {
@@ -1048,10 +1047,6 @@ a {
 }
 
 
-
-.cepResultado:hover {
-  background: #e0e7ff;
-}
 
 /* FRETE */
 .cepResultado strong {

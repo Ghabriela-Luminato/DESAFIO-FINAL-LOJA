@@ -75,11 +75,7 @@ http://localhost:5173
 
 ---
 
-<<<<<<< HEAD
 ##  Estrutura do Projeto
-=======
-## Estrutura do Projeto
->>>>>>> 11f7fe6 (ALTERAÇÕES IMPORTANTES)
 
 ```
 src/

@@ -103,8 +103,6 @@ Este projeto teve como objetivo consolidar conhecimentos em desenvolvimento fron
 
 ## 👩‍💻 Desenvolvido por
 
-# Criadora :
-
 Ghabriela de Oliveira Santos Luminato
 
 E-mail: ghabriela.santosluminato@gmail.com</a>

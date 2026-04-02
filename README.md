@@ -1,16 +1,103 @@
-# React + Vite
+#  Panda Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto desenvolvido como **Desafio Final do Projeto Desenvolve Itabira (Frontend)**.
 
-Currently, two official plugins are available:
+A proposta foi criar uma loja virtual consumindo dados de uma API externa, aplicando conceitos de React, organização de componentes e boas práticas de desenvolvimento.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Tecnologias Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* Vite
+* JavaScript (ES6+)
+* CSS3
+* React Router DOM
+* LocalStorage
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##  Funcionalidades
+
+* 🛒 Listagem de produtos
+* 🔍 Busca de produtos
+* 📂 Filtro por categorias
+* 📄 Página de detalhes do produto
+* 🔐 Sistema de login e cadastro (LocalStorage)
+* 🧾 Validação de formulário
+* 🛍️ Botão de adicionar ao carrinho (estrutura preparada)
+* 💻 Layout responsivo
+* 🎬 Transições entre páginas
+
+---
+
+## 🔌 API Utilizada
+
+Os produtos foram consumidos da API:
+
+👉 https://fakestoreapi.com/
+
+---
+
+## ▶️ Como rodar o projeto
+
+1. Clone o repositório:
+
+```bash
+git clone <URL_DO_SEU_REPOSITORIO>
+```
+
+2. Acesse a pasta:
+
+```bash
+cd Ghabriela-Store
+```
+
+3. Instale as dependências:
+
+```bash
+npm install
+```
+
+4. Rode o projeto:
+
+```bash
+npm run dev
+```
+
+5. Abra no navegador:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/   # Componentes reutilizáveis
+├── pages/        # Páginas do sistema
+├── services/     # Consumo de API
+├── styles/       # Estilos globais
+├── assets/       # Imagens (quando necessário)
+```
+
+---
+
+## ✨ Considerações Finais
+
+Este projeto teve como objetivo consolidar conhecimentos em desenvolvimento frontend, incluindo:
+
+* Organização de código
+* Consumo de API
+* Navegação entre páginas
+* Manipulação de estado
+* Boas práticas com React
+
+---
+
+## 👩‍💻 Desenvolvido por
+
+**Ghabriela Luminato**

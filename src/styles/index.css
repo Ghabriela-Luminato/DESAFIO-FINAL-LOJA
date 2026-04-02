@@ -177,6 +177,14 @@ body{
 .btnLogin:hover {
   background: #222;
 }
+.errorMsg {
+  color: red;
+  text-align: center;   /* 👈 centraliza o texto */
+  font-size: 13px;
+  margin-top: 10px;
+  display: block;
+}
+
 
 
 .divider {

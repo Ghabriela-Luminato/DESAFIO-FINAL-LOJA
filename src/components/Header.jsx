@@ -161,11 +161,7 @@ function Header({ setSearch }) {
             <i className="fa-solid fa-cart-shopping cartIcon"></i>
           </a>
 
-          {/*  BOTÃO DARK MODE */}
-            <div className="themeToggle" onClick={() => setDark(!dark)}>
-  <i className={dark ? "fa-solid fa-moon" : "fa-solid fa-sun"}></i>
-</div>
-
+  
           <div
             className="loginArea"
             onClick={() => {
@@ -188,7 +184,12 @@ function Header({ setSearch }) {
                 "Entrar"
               )}
             </span>
+            
           </div>
+      {/*  BOTÃO DARK MODE */}
+            <div className="themeToggle" onClick={() => setDark(!dark)}>
+  <i className={dark ? "fa-solid fa-moon" : "fa-solid fa-sun"}></i>
+</div>
 
         </nav>
 

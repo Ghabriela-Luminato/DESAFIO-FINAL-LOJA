@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.svg";
 
 function Header({ setSearch }) {
   const navigate = useNavigate();
@@ -107,10 +108,8 @@ function Header({ setSearch }) {
             }
           }}
         >
-       <img
-  src="/logo.svg"
-  alt="Panda Store"
-/>
+       <img src={logo} alt="Panda Store" />
+
         </div>
 
         <div className="cepBox">

@@ -1,4 +1,4 @@
-
+import acabatepay from "../assets/acabatepay.png";
 
 function SecurePayment() {
   return (
@@ -8,7 +8,7 @@ function SecurePayment() {
       <div className="secure-box">
     
         <div className="pagamento">
-          <img src="/acabatepay.png" alt="Acabate Pay" />
+          <img src={acabatepay} alt="Acabate Pay" />
           <span className="pay-text">Pagamento seguro via Acabate Pay</span>
         </div>
       </div>

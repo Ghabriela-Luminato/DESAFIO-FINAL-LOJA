@@ -2,29 +2,36 @@
 
 import { Link } from "react-router-dom";
 
+import ele1 from "../assets/ele1.png";
+import ele2 from "../assets/ele2.png";
+import ele3 from "../assets/ele3.png";
+import ele4 from "../assets/ele4.png";
+
+
 export default function Categorias() {
-  const categorias = [
-    {
-      nome: "Eletrônicos",
-      img: "/ele1.png",
-      to: `/produtos?cat=${encodeURIComponent("electronics")}`,
-    },
-    {
-      nome: "Joias",
-      img: "/ele2.png",
-      to: `/produtos?cat=${encodeURIComponent("jewelery")}`,
-    },
-    {
-      nome: "Masculino",
-      img: "/ele3.png",
-      to: `/produtos?cat=${encodeURIComponent("men's clothing")}`,
-    },
-    {
-      nome: "Feminino",
-      img: "/ele4.png",
-      to: `/produtos?cat=${encodeURIComponent("women's clothing")}`,
-    },
-  ];
+ const categorias = [
+  {
+    nome: "Eletrônicos",
+    img: ele1,
+    to: `/produtos?cat=${encodeURIComponent("electronics")}`,
+  },
+  {
+    nome: "Joias",
+    img: ele2,
+    to: `/produtos?cat=${encodeURIComponent("jewelery")}`,
+  },
+  {
+    nome: "Masculino",
+    img: ele3,
+    to: `/produtos?cat=${encodeURIComponent("men's clothing")}`,
+  },
+  {
+    nome: "Feminino",
+    img: ele4,
+    to: `/produtos?cat=${encodeURIComponent("women's clothing")}`,
+  },
+];
+
 
   return (
     <section className="categorias-wrapper">

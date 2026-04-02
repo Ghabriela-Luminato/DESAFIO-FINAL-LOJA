@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import "../index.css";
+
+
 
 function ProductCard({ product }) {
   const price = product.price;

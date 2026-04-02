@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import Principal from "./pages/Principal"; 
 import Header from "./components/Header.jsx";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 
 import PageTransition from "./components/PageTransition.jsx";
 

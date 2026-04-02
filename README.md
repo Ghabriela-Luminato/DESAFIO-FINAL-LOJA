@@ -31,7 +31,7 @@ A proposta foi criar uma loja virtual consumindo dados de uma API externa, aplic
 
 ---
 
-## 🔌 API Utilizada
+##  API Utilizada
 
 Os produtos foram consumidos da API:
 
@@ -73,7 +73,7 @@ http://localhost:5173
 
 ---
 
-## 📁 Estrutura do Projeto
+##  Estrutura do Projeto
 
 ```
 src/
@@ -86,7 +86,7 @@ src/
 
 ---
 
-## ✨ Considerações Finais
+## Considerações Finais
 
 Este projeto teve como objetivo consolidar conhecimentos em desenvolvimento frontend, incluindo:
 

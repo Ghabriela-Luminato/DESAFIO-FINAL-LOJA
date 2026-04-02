@@ -103,4 +103,11 @@ Este projeto teve como objetivo consolidar conhecimentos em desenvolvimento fron
 
 ## 👩‍💻 Desenvolvido por
 
-**Ghabriela Luminato**
+# Criadora :
+
+Ghabriela de Oliveira Santos Luminato
+
+E-mail: ghabriela.santosluminato@gmail.com</a>
+
+
+<img src="https://raw.githubusercontent.com/Ghabriela-Luminato/Dashbaord-Tecnologia-Medica-/main/Logo%20Ghabriela.png" width="200">

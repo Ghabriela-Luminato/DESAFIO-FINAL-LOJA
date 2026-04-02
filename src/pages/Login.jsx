@@ -1,17 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import logo from "../assets/logo.svg"; 
 
 function Login() {
   const navigate = useNavigate();
 
   const [isRegister, setIsRegister] = useState(false);
-
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
-
 
   function handleLogin() {
     setLoading(true);
@@ -42,7 +41,6 @@ function Login() {
     }, 800);
   }
 
- 
   function handleRegister() {
     const savedUser = JSON.parse(localStorage.getItem("userData"));
 
@@ -64,7 +62,6 @@ function Login() {
     const user = { nome, email, senha };
     localStorage.setItem("userData", JSON.stringify(user));
 
-    // 🔥 volta pro login
     setIsRegister(false);
     setErro("");
     setNome("");
@@ -75,19 +72,16 @@ function Login() {
   return (
     <div className="loginPage">
       <div className="loginBox">
-
         <div className="backButton" onClick={() => navigate("/")}>
           ← Voltar
         </div>
 
         <div className="logoArea">
-          <img src="/logo.svg" alt="Panda Store" />
+          <img src={logo} alt="Panda Store" /> 
         </div>
 
-      
         <h2>{isRegister ? "Criar conta" : "Entrar na conta"}</h2>
 
-       
         {isRegister && (
           <input
             type="text"
@@ -117,18 +111,13 @@ function Login() {
           className="btnLogin"
           onClick={isRegister ? handleRegister : handleLogin}
         >
-          {isRegister
-            ? "Criar conta"
-            : loading
-            ? "Entrando..."
-            : "Entrar"}
+          {isRegister ? "Criar conta" : loading ? "Entrando..." : "Entrar"}
         </button>
 
         <div className="divider">
           <span>ou</span>
         </div>
 
-    
         <button
           className="btnCreate"
           onClick={() => {
@@ -138,7 +127,6 @@ function Login() {
         >
           {isRegister ? "Já tenho conta" : "Criar conta"}
         </button>
-
       </div>
     </div>
   );

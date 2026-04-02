@@ -101,7 +101,7 @@ Este projeto teve como objetivo consolidar conhecimentos em desenvolvimento fron
 
 ---
 
-## 👩‍💻 Desenvolvido por
+##  Desenvolvido por
 
 Ghabriela de Oliveira Santos Luminato
 

@@ -10,9 +10,7 @@ function Footer() {
         {/* LOGO */}
         <div className="footer-col">
          <img src={panda} alt="Logo Panda" className="footer-logo" />
-          <p className="desc">
-            Sua loja online com produtos de qualidade e entrega garantida.
-          </p>
+      
         </div>
 
           {/* CONTATO */}

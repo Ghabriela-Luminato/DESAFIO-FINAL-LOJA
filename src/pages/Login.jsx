@@ -12,7 +12,7 @@ function Login() {
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🔐 LOGIN
+
   function handleLogin() {
     setLoading(true);
 
@@ -42,7 +42,7 @@ function Login() {
     }, 800);
   }
 
-  // 🆕 CADASTRO
+ 
   function handleRegister() {
     const savedUser = JSON.parse(localStorage.getItem("userData"));
 
@@ -84,10 +84,10 @@ function Login() {
           <img src="/logo.svg" alt="Panda Store" />
         </div>
 
-        {/* 🔥 TÍTULO MUDA */}
+      
         <h2>{isRegister ? "Criar conta" : "Entrar na conta"}</h2>
 
-        {/* 🔥 INPUT NOME SÓ NO CADASTRO */}
+       
         {isRegister && (
           <input
             type="text"
@@ -113,7 +113,6 @@ function Login() {
 
         {erro && <span className="errorMsg">{erro}</span>}
 
-        {/* 🔥 BOTÃO PRINCIPAL MUDA */}
         <button
           className="btnLogin"
           onClick={isRegister ? handleRegister : handleLogin}
@@ -129,7 +128,7 @@ function Login() {
           <span>ou</span>
         </div>
 
-        {/* 🔥 TROCA DE MODO */}
+    
         <button
           className="btnCreate"
           onClick={() => {

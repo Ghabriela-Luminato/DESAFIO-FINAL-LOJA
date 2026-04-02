@@ -56,7 +56,7 @@ function AppRoutes({ search, setSearch }) {
           }
         />
 
-        {/* ✅ LOGIN (ADICIONADO CERTO) */}
+        {/*  LOGIN */}
         <Route
   path="/login"
   element={

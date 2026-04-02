@@ -86,25 +86,25 @@ function Principal() {
             </Link>
           </div>
 
-          {/* ================= CARROSSEL ================= */}
+          
           <div className="carousel-wrapper">
             <Carousel />
           </div>
 
-          {/* ================= OFERTAS ================= */}
+         
           <DailyDeals products={products} />
 
-          {/* ================= CATEGORIAS ================= */}
+          
           <Categorias />
 
-          {/* ================= AVALIAÇÕES ================= */}
+          
           <Reviews />
 
-          {/* ================= PAGAMENTO ================= */}
+     
           <SecurePayment />
         </div>
 
-        {/* ================= FOOTER ================= */}
+    
         <Footer />
       </>
     </PageTransition>

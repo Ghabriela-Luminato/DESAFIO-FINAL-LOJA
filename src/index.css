@@ -82,15 +82,8 @@ body{
   color: #000;
   font-size: 14px;
   font-weight: 500;
-  margin-left: 6px; /* 🔥 só espaço do ícone */
-  white-space: nowrap; /* evita quebrar linha */
-}
-
-
-  .errorMsg {
-  color: #ef4444;
-  font-size: 13px;
-  text-align: center;
+  margin-left: 6px; 
+  white-space: nowrap; 
 }
 
 .userIcon {
@@ -118,7 +111,7 @@ body{
   animation: gradientMove 10s ease infinite;
 }
 
-/* ANIMAÇÃO */
+
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
@@ -144,7 +137,7 @@ body{
   box-shadow: 0 15px 40px rgba(0,0,0,0.35);
 }
 
-/* LOGO MAIS BONITA */
+
 .logoArea {
   display: flex;
   justify-content: center;
@@ -155,7 +148,7 @@ body{
   width: 200px;
 }
 
-/* INPUT MELHOR */
+
 .loginBox input {
   padding: 13px;
   border-radius: 12px;
@@ -169,10 +162,6 @@ body{
   border-color: black;
   box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
 }
-
-/* BOTÃO PRINCIPAL */
-
-
 
 .btnLogin {
   background: rgb(36, 84, 4);
@@ -189,7 +178,7 @@ body{
   background: #222;
 }
 
-/* DIVIDER MELHOR */
+
 .divider {
   text-align: center;
   position: relative;
@@ -214,7 +203,7 @@ body{
   z-index: -1;
 }
 
-/* BOTÃO SECUNDÁRIO ESTILOSO */
+
 .btnCreate {
   background: transparent;
   border: 2px solid rgb(0, 0, 0);
@@ -230,7 +219,7 @@ body{
   color: white;
 }
 
-/* VOLTAR MAIS DISCRETO */
+
 .backButton {
   position: absolute;
   top: 20px;
@@ -260,7 +249,7 @@ body{
 }
 
 .cartIcon:hover {
-  color: #0b3d1b; /* verde da loja */
+  color: #0b3d1b; 
   transform: scale(1.2);
 }
 /*__________________________________________________________________________/*
@@ -268,7 +257,7 @@ body{
 
 /* ICONE CORAÇÃO */
 .heartIcon {
-  color: #e11d48; /* vermelho */
+  color: #e11d48; 
   font-size: 20px;
   transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -306,7 +295,7 @@ body{
 }
 .filters a {
   text-decoration: none;
-  color: inherit; /* 🔥 mantém cor do botão */
+  color: inherit; 
 }
 .filters button:hover {
   background: rgb(0, 0, 0);
@@ -512,16 +501,7 @@ body{
   cursor: pointer;
 }
 
-
-
-
-
-
-
-
 /*__________________________________________________________________________*/
-
-
 
 /* PÁGINA DETALHAMENTO DE PRODUTOS */
  .grid {
@@ -558,7 +538,7 @@ body{
   }
 }
 
-/* 🔥 CORRIGE TEXTO BRANCO */
+
 .product-info {
   color: #333;
 }
@@ -570,7 +550,7 @@ body{
 .quantidade-box button {
   color: #000;
 }
-/* 🔢 QUANTIDADE */
+
 .quantidade-box {
   display: flex;
   align-items: center;
@@ -584,7 +564,7 @@ body{
   margin-top: 20px;
   padding: 15px 0;
   border-top: 1px solid #d0cdcd;
-  color: #333; /* 👈 FORÇA COR */
+  color: #333; 
 }
 
 .rating-box span {
@@ -598,7 +578,7 @@ body{
 
 
 
-/* 🚚 FRETE BONITO */
+
 .frete-box {
   margin: 10px 0 5px;
 }
@@ -606,10 +586,10 @@ body{
 .frete {
   font-size: 16px;
   font-weight: 600;
-  color: #9c0202; /* verde loja */
+  color: #9c0202; 
 }
 
-/* quando não tem CEP */
+
 .frete-warning {
   font-size: 14px;
   color: #666;
@@ -636,7 +616,7 @@ body{
   text-align: center;
 }
 
-/* 🛒 AÇÕES */
+
 .actions {
   display: flex;
   flex-direction: column;
@@ -644,9 +624,9 @@ body{
   margin-top: 15px;
 }
 
-/* botão preto (igual seu print) */
+
 .add-cart {
-  width: 300px; /* 👈 tamanho fixo */
+  width: 300px; 
   max-width: 100%;
   background: #000;
   color: white;
@@ -663,16 +643,16 @@ body{
 
 
 
-/* infos */
+
 .product-info {
   flex: 1;
   max-width: 600px;
 
-  margin-left: 40px; /* 👈 EMPURRA PRA DIREITA */
+  margin-left: 40px; 
 }
 
 
-/* título */
+
 .title {
   font-size: 24px;
   font-weight: 600;
@@ -680,7 +660,7 @@ body{
   color: #000000;
 }
 
-/* descrição */
+
 
 .product-description-box {
   max-width: 1100px;
@@ -693,20 +673,20 @@ body{
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
-/* título da descrição */
+
 .product-description-box h2 {
   font-size: 22px;
   margin-bottom: 15px;
   color: #003d13;
 }
 
-/* texto */
+
 .product-description-box p {
   color: #040404;
   line-height: 1.7;
   font-size: 15px;
 }
-/* preço */
+
 .price {
   font-size: 30px;
   color: #0b3d1b;
@@ -851,7 +831,7 @@ a {
 
 
 
-/* 🧾 BLOCO DE AVALIAÇÕES (SÓ NA PRODUCT PAGE) */
+
 .product-page .reviews {
   max-width: 1100px;
   margin: 50px auto;
@@ -864,7 +844,7 @@ a {
   color: #003d13;
 }
 
-/* 🧱 CARD */
+
 .product-page .review-card {
   display: flex;
   gap: 15px;
@@ -873,7 +853,7 @@ a {
   align-items: flex-start;
 }
 
-/* 🖼️ FOTO */
+
 .product-page .review-card img {
   width: 45px;
   height: 45px;
@@ -881,12 +861,12 @@ a {
   object-fit: cover;
 }
 
-/* 📄 INFO */
+
 .product-page .review-info {
   flex: 1;
 }
 
-/* 👤 NOME */
+
 .product-page .review-info strong {
   display: block;
   font-size: 14px;
@@ -894,13 +874,13 @@ a {
   margin-bottom: 2px;
 }
 
-/* ⭐ ESTRELAS */
+
 .product-page .review-info .stars {
   font-size: 13px;
   color: #f5a623;
 }
 
-/* 💬 COMENTÁRIO */
+
 .product-page .review-info p {
   margin-top: 5px;
   font-size: 14px;
@@ -908,7 +888,7 @@ a {
   line-height: 1.4;
 }
 
-/* ✨ HOVER SUAVE */
+
 .product-page .review-card:hover {
   background: #fafafa;
   transition: 0.2s;
@@ -953,18 +933,18 @@ a {
   font-weight: 500;
 }
 
-/* TEXTO NORMAL */
+
 .top-bar span {
   font-weight: 400;
   opacity: 0.9;
 }
 
-/* 🔥 DESTAQUE SUAVE */
+
 .top-bar strong {
   animation: glow 2s ease-in-out infinite alternate;
 }
 
-/* ANIMAÇÃO SUAVE */
+
 @keyframes glow {
   from {
     opacity: 0.85;
@@ -1026,7 +1006,7 @@ a {
 
 }
 
-/* RESULTADO (quando mostra CEP + cidade) */
+
 .cepResultado {
   display: flex;
   flex-direction: column; 
@@ -1082,20 +1062,20 @@ a {
 
 /*2 CATEGORIA - CIRCULO */
 
-/* WRAPPER */
+
 .categorias-wrapper {
   padding: 50px 20px;
   text-align: center;
 }
 
-/* TÍTULO */
+
 .titulo-categorias {
   font-size: 24px;
   margin-bottom: 30px;
   color: #222;
 }
 
-/* GRID (SEM SCROLL) */
+
 .categorias-grid {
   display: flex;
   justify-content: center;
@@ -1103,7 +1083,6 @@ a {
   flex-wrap: wrap;
 }
 
-/* ITEM */
 .categoria-item {
   display: flex;
   flex-direction: column;
@@ -1139,7 +1118,7 @@ a {
   object-fit: contain;
 }
 
-/* TEXTO */
+
 .categoria-item span {
   margin-top: 12px;
   font-size: 15px;
@@ -1178,7 +1157,7 @@ a {
   margin-bottom: 20px;
 }
 
-/* Título centralizado */
+
 .deals-title {
   font-size: 26px;
   font-weight: bold;
@@ -1232,7 +1211,7 @@ a {
   border-radius: 12px;
 }
 
-/* TÍTULO */
+
 .reviews-title {
   text-align: center;
   font-size: 28px;
@@ -1241,14 +1220,13 @@ a {
   color: #222;
 }
 
-/* GRID */
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
 }
 
-/* CARD */
+
 .review-card {
   background: #fff;
   border-radius: 16px;
@@ -1259,13 +1237,12 @@ a {
   position: relative;
 }
 
-/* HOVER */
+
 .review-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
 }
 
-/* HEADER */
 .review-header {
   display: flex;
   align-items: center;
@@ -1273,7 +1250,7 @@ a {
   margin-bottom: 10px;
 }
 
-/* FOTO  */
+
 .review-avatar {
   width: 50px;
   height: 50px;
@@ -1283,19 +1260,17 @@ a {
   border: 2px solid #eee;
 }
 
-/* NOME */
 .review-name {
   font-weight: 600;
   color: #111;
 }
 
-/* ESTRELAS */
 .review-stars {
   font-size: 14px;
   color: #f5a623;
 }
 
-/* COMENTÁRIO */
+
 .review-comment {
   font-size: 14px;
   color: #555;
@@ -1303,7 +1278,7 @@ a {
   line-height: 1.4;
 }
 
-/* COMPRA VERIFICADA */
+
 .verified {
   font-size: 12px;
   color: #00a650;
@@ -1337,7 +1312,7 @@ a {
   margin-bottom: 15px;
   color: #2c2c2c;
 }
-/* SEGURANÇA */
+
 .seguranca .badge {
   display: inline-flex;
   align-items: center;
@@ -1365,7 +1340,7 @@ a {
   font-size: 15px;
 }
 
-/* RESPONSIVO */
+
 @media (max-width: 768px) {
   .secure-container {
     flex-direction: column;
@@ -1432,7 +1407,7 @@ a {
   margin-bottom: 8px;
 }
 
-/* LOGO FOOTER  */
+
 .footer-logo {
   width: 200px;
   height: auto;
@@ -1481,26 +1456,26 @@ main {
 }
 
 
+/*__________________________________________________________________________*/
 
-
-/* ================= DARK MODE ================= */
+/*  DARK MODE */
 
 body.dark {
   background: #020617;
   color: #e5e7eb;
 }
 
-/* HEADER */
+
 body.dark .header {
   background: #020617;
 }
 
-/* MENU */
+
 body.dark .menu a {
   color: #e5e7eb;
 }
 
-/* LOGIN */
+
 body.dark .loginText {
   color: #e5e7eb;
 }
@@ -1509,7 +1484,7 @@ body.dark .userIcon {
   color: #e5e7eb;
 }
 
-/* CEP */
+
 body.dark .cepBox span {
   color: #e5e7eb;
 }
@@ -1520,7 +1495,7 @@ body.dark .cepBox input {
   border: 1px solid #374151;
 }
 
-/* BUSCA */
+
 body.dark .searchBox input {
   background: #2e3135;
   color: #fff;
@@ -1531,7 +1506,7 @@ body.dark .lupa {
   color: #9ca3af;
 }
 
-/* FILTROS */
+
 body.dark .filters {
   background: #020617;
    border-top: 1px solid #141414;
@@ -1547,7 +1522,7 @@ body.dark .filters button:hover {
   background: #000000;
 }
 
-/* CARDS */
+
 body.dark .card {
   background: #1f2937;
   color: #e5e7eb;
@@ -1557,7 +1532,7 @@ body.dark .card-title {
   color: #e5e7eb;
 }
 
-/* CATEGORIAS */
+
 body.dark .categoria-icon {
   background: #d3d3d6;
 }
@@ -1566,7 +1541,7 @@ body.dark .categoria-item span {
   color: #e5e7eb;
 }
 
-/* REVIEWS */
+
 body.dark .reviews-container {
   background: #000000;
 }
@@ -1575,38 +1550,38 @@ body.dark .review-card {
   background: #1f2937;
   color: #e5e7eb;
 }
-/* TÍTULO */
+
 body.dark .reviews-title {
   color: #f9fafb;
 }
 
-/* CARD */
+
 body.dark .review-card {
   background: #1f2937;
 }
 
-/* NOME DA PESSOA */
+
 body.dark .review-name {
   color: #f3f4f6;
 }
 
-/* TEXTO DO COMENTÁRIO */
+
 body.dark .review-comment {
   color: #d1d5db;
 }
 
-/* TEXTO "compra verificada" */
+
 body.dark .verified {
   color: #22c55e;
 }
 
-/* HEADER (nome + estrelas juntos se tiver variação) */
+
 body.dark .review-header {
   color: #e5e7eb;
 }
 
 
-/* OFERTAS */
+
 body.dark .deals-container {
   background: #000000;
 
@@ -1616,7 +1591,7 @@ body.dark .deals-title {
   color: #e5e7eb;
 }
 
-/* FOOTER */
+
 body.dark .footer {
   background: #111827;
 }
@@ -1626,7 +1601,7 @@ body.dark .footer-bottom {
 }
 
 
-/* PAGAMENTO */
+
 body.dark .pagamento {
   background: transparent;
   
@@ -1636,7 +1611,7 @@ body.dark .pay-text {
   color: #d1d5db;
 }
 
-/* CONTAINER SEGURANÇA / PAGAMENTO */
+
 body.dark .secure-container {
   background: #020617;
   border: none;
@@ -1646,7 +1621,7 @@ body.dark .secure-box h3 {
   color: #e5e7eb;
 }
 
-/* BADGE (cadeado) */
+
 body.dark .seguranca .badge {
   background: #1f2937;
   border: 2px solid #22c55e;
@@ -1701,18 +1676,18 @@ body.dark .logo img {
 }
 
 body.dark .top-bar {
-  background: linear-gradient(90deg, #22c55e, #388253); /* verde mais escuro */
-  color: #eaeaea; /* branco mais suave */
+  background: linear-gradient(90deg, #22c55e, #388253); 
+  color: #eaeaea; 
 }
 
 
-/* TEXTO NORMAL */
+
 body.dark.top-bar span {
   font-weight: 400;
   background-color: white;
 }
 
-/* 🔥 DESTAQUE SUAVE */
+
 body.dark.top-bar strong {
   animation: glow 2s ease-in-out infinite alternate;
 }

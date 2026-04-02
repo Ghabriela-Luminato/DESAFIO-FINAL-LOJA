@@ -10,7 +10,7 @@ function Header({ setSearch }) {
 
   const [user, setUser] = useState("");
 
-  // 🌙 DARK MODE
+  //  DARK MODE
   const [dark, setDark] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
@@ -162,7 +162,7 @@ function Header({ setSearch }) {
             <i className="fa-solid fa-cart-shopping cartIcon"></i>
           </a>
 
-          {/* 🌙 BOTÃO DARK MODE */}
+          {/*  BOTÃO DARK MODE */}
             <div className="themeToggle" onClick={() => setDark(!dark)}>
   <i className={dark ? "fa-solid fa-moon" : "fa-solid fa-sun"}></i>
 </div>

@@ -1,12 +1,14 @@
-#  Panda Store
+# Panda Store
 
 Projeto desenvolvido como **Desafio Final do Projeto Desenvolve Itabira (Frontend)**.
 
 A proposta foi criar uma loja virtual consumindo dados de uma API externa, aplicando conceitos de React, organização de componentes e boas práticas de desenvolvimento.
 
+Além do desenvolvimento, **toda a identidade visual do projeto foi criada por mim**, incluindo a marca, logo e artes utilizadas na aplicação.
+
 ---
 
-## Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 * React
 * Vite
@@ -25,7 +27,7 @@ A proposta foi criar uma loja virtual consumindo dados de uma API externa, aplic
 * 📄 Página de detalhes do produto
 * 🔐 Sistema de login e cadastro (LocalStorage)
 * 🧾 Validação de formulário
-* 🛍️ Botão de adicionar ao carrinho (estrutura preparada)
+* 🛍️ Estrutura de carrinho
 * 💻 Layout responsivo
 * 🎬 Transições entre páginas
 
@@ -39,18 +41,18 @@ Os produtos foram consumidos da API:
 
 ---
 
-## ▶️ Como rodar o projeto
+## ▶ Como rodar o projeto
 
 1. Clone o repositório:
 
 ```bash
-git clone <URL_DO_SEU_REPOSITORIO>
+git clone https://github.com/Ghabriela-Luminato/DESAFIO-FINAL-LOJA
 ```
 
 2. Acesse a pasta:
 
 ```bash
-cd Ghabriela-Store
+cd DESAFIO-FINAL-LOJA
 ```
 
 3. Instale as dependências:
@@ -73,7 +75,11 @@ http://localhost:5173
 
 ---
 
+<<<<<<< HEAD
 ##  Estrutura do Projeto
+=======
+## Estrutura do Projeto
+>>>>>>> 11f7fe6 (ALTERAÇÕES IMPORTANTES)
 
 ```
 src/
@@ -81,7 +87,7 @@ src/
 ├── pages/        # Páginas do sistema
 ├── services/     # Consumo de API
 ├── styles/       # Estilos globais
-├── assets/       # Imagens (quando necessário)
+├── assets/       # Imagens e identidade visual
 ```
 
 ---
@@ -90,11 +96,12 @@ src/
 
 Este projeto teve como objetivo consolidar conhecimentos em desenvolvimento frontend, incluindo:
 
-* Organização de código
 * Consumo de API
 * Navegação entre páginas
 * Manipulação de estado
+* Organização de código
 * Boas práticas com React
+* Criação de identidade visual própria
 
 ---
 

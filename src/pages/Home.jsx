@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useLocation } from "react-router-dom";
+import { getProducts } from "../services/api"; // 🔥 IMPORTANTE
 
 function Home({ search }) {
   const [products, setProducts] = useState([]);
@@ -9,6 +10,7 @@ function Home({ search }) {
 
   const location = useLocation();
 
+  // 🔹 pega categoria da URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const cat = params.get("cat");
@@ -20,39 +22,38 @@ function Home({ search }) {
     }
   }, [location.search]);
 
- 
- useEffect(() => {
-  async function loadProducts() {
-    try {
+  // 🔥 BUSCA PRODUTOS (AGORA COM SERVICE)
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        setLoading(true);
 
-      setLoading(true);
-      const res = await fetch("https://fakestoreapi.com/products");
-      const data = await res.json();
+        const data = await getProducts(); // ✅ usando service
 
-  
-      let filtered = data;
+        let filtered = data;
 
-      if (category !== "all") {
-        filtered = data.filter(
-          (product) => product.category === category
-        );
+        if (category !== "all") {
+          filtered = data.filter(
+            (product) => product.category === category
+          );
+        }
+
+        setProducts(filtered);
+      } catch (err) {
+        console.error("ERRO:", err);
+        setProducts([]);
+      } finally {
+        setLoading(false);
       }
-
-      setProducts(filtered);
-    } catch (err) {
-      console.error("ERRO:", err);
-      setProducts([]);
-    } finally {
-      setLoading(false);
     }
-  }
 
-  loadProducts();
-}, [category]);
+    loadProducts();
+  }, [category]);
 
   return (
     <div>
-   
+
+      {/* 🔹 FILTROS */}
       <div className="filters">
         <button
           className={category === "all" ? "active" : ""}
@@ -95,7 +96,7 @@ function Home({ search }) {
         </button>
       </div>
 
-
+      {/* 🔹 PRODUTOS */}
       <div className="grid">
         {products
           .filter((product) => {
@@ -124,6 +125,7 @@ function Home({ search }) {
           ))}
       </div>
 
+      {/* 🔹 LOADING */}
       {loading && (
         <p style={{ textAlign: "center", marginTop: "10px" }}>
           Carregando...

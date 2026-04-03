@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-
+import { getProductById } from "../services/api";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -9,11 +8,13 @@ function ProductDetails() {
 
   useEffect(() => {
     let mounted = true;
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        if (mounted) setProduct(data);
-      });
+
+    async function loadProduct() {
+      const data = await getProductById(id);
+      if (mounted) setProduct(data);
+    }
+
+    loadProduct();
 
     return () => (mounted = false);
   }, [id]);
@@ -22,15 +23,12 @@ function ProductDetails() {
 
   return (
     <div className="product-page">
-
       <div className="product-container">
-
 
         <div className="product-image">
           <img src={product.image} alt={product.title} />
         </div>
 
-        
         <div className="product-info">
           <h1 className="product-name">{product.title}</h1>
 
@@ -45,8 +43,6 @@ function ProductDetails() {
         </div>
 
       </div>
-
-
     </div>
   );
 }

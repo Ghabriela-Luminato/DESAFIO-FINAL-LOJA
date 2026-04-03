@@ -251,13 +251,13 @@ body{
 
 /*  ICONE CARRINHO */
 .cartIcon {
-  color: #383c37;
+  color: #1a7902;
   font-size: 20px;
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .cartIcon:hover {
-  color: #0b3d1b; 
+  color: #000000; 
   transform: scale(1.2);
 }
 /*__________________________________________________________________________/*
@@ -1476,7 +1476,7 @@ body.dark .reviews-title {
 
 
 body.dark .review-card {
-  background: #1f2937;
+  background: #1a202b;
 }
 
 
@@ -1638,14 +1638,14 @@ body.dark.top-bar strong {
 .dark .product-page .reviews h2 {
   font-size: 22px;
   margin-bottom: 20px;
-  color: #058c37; 
+  color: #1b9146; 
 }
 
 .dark .product-page .review-card {
   display: flex;
   gap: 15px;
   padding: 15px 0;
-  border-bottom: 1px solid #ffffff; 
+  border-bottom: 1px solid #0f0f0f; 
   align-items: flex-start;
 }
 
@@ -1712,4 +1712,8 @@ body.dark .old-price {
   text-decoration: line-through;
   color: #6b6767;
   font-size: 13px;
+}
+
+body.dark .quantidade-box {
+  color: #ffffff;
 }

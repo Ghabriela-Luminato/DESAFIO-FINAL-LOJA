@@ -124,10 +124,6 @@ function Product() {
             </button>
           </div>
 
-          <div className="rating-box">
-            <span>⭐ {product.rating?.rate}</span>
-            <span>({product.rating?.count} avaliações)</span>
-          </div>
         </div>
       </div>
 

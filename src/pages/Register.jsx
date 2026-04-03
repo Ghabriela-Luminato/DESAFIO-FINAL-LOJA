@@ -12,7 +12,7 @@ function Register() {
   function handleRegister() {
     const savedUser = JSON.parse(localStorage.getItem("userData"));
 
-    // ❌ validação básica
+  
     if (!nome || !email || !senha) {
       setErro("Preencha todos os campos");
       return;
@@ -23,17 +23,17 @@ function Register() {
       return;
     }
 
-    // ❌ impedir email duplicado
+  
     if (savedUser && savedUser.email === email) {
       setErro("Esse email já está cadastrado");
       return;
     }
 
-    // ✅ salvar usuário
+   
     const user = { nome, email, senha };
     localStorage.setItem("userData", JSON.stringify(user));
 
-    // 🔥 já loga automaticamente
+    
     localStorage.setItem("loggedUser", nome);
 
     navigate("/");

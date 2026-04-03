@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getProducts } from "../services/api"; // 🔥
 
 import Carousel from "../components/Carousel.jsx";
 import PageTransition from "../components/PageTransition.jsx";
@@ -8,8 +9,6 @@ import Categorias from "../components/Categorias.jsx";
 import Reviews from "../components/Reviews.jsx";
 import SecurePayment from "../components/SecurePayment.jsx";
 import Footer from "../components/Footer.jsx";
-
-
 
 function Principal() {
   const [products, setProducts] = useState([]);
@@ -21,15 +20,15 @@ function Principal() {
 
     async function loadProducts() {
       try {
-        const res = await fetch("https://fakestoreapi.com/products");
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const data = await getProducts(); // ✅ USANDO SERVICE
+
         if (mounted) {
           setProducts(data);
           setLoading(false);
         }
       } catch (err) {
         console.error("Erro ao carregar produtos:", err);
+
         if (mounted) {
           setError(err);
           setLoading(false);
@@ -38,6 +37,7 @@ function Principal() {
     }
 
     loadProducts();
+
     return () => {
       mounted = false;
     };
@@ -47,7 +47,7 @@ function Principal() {
     <PageTransition>
       <>
         <div className="container">
-        
+
           {/* ================= MENU ================= */}
           <div className="filters">
             <Link to="/produtos">
@@ -86,25 +86,19 @@ function Principal() {
             </Link>
           </div>
 
-          
           <div className="carousel-wrapper">
             <Carousel />
           </div>
 
-         
           <DailyDeals products={products} />
 
-          
           <Categorias />
 
-          
           <Reviews />
 
-     
           <SecurePayment />
         </div>
 
-    
         <Footer />
       </>
     </PageTransition>

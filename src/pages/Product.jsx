@@ -1,6 +1,6 @@
-
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getProductById } from "../services/api"; // 🔥
 
 function Product() {
   const { id } = useParams();
@@ -9,19 +9,22 @@ function Product() {
   const [quantidade, setQuantidade] = useState(1);
   const [reviews, setReviews] = useState([]);
 
-
   const cep = localStorage.getItem("cep");
   const frete = localStorage.getItem("frete");
 
+  // 🔥 AGORA USANDO SERVICE
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(res => res.json())
-      .then(data => setProduct(data));
+    async function loadProduct() {
+      const data = await getProductById(id);
+      setProduct(data);
+    }
+
+    loadProduct();
   }, [id]);
 
- 
+  // -------- REVIEWS --------
   const homens = ["Carlos", "Marcos", "Lucas", "Rafael", "Bruno", "Gustavo", "Felipe", "Leonardo", "Matheus", "Thiago", "Eduardo", "Rodrigo", "André", "Diego", "Vitor", "Samuel", "Fernando", "Alexandre", "Ricardo", "Guilherme"];
-  const mulheres = ["Ana", "Juliana", "Fernanda", "Patrícia", "Camila", "Sofia", "Isabela", "Maria", "Larissa", "Beatriz",  "Carla", "Renata", "Aline", "Vanessa", "Gabriela", "Bruna", "Mariana", "Letícia", "Amanda", "Bianca"];
+  const mulheres = ["Ana", "Juliana", "Fernanda", "Patrícia", "Camila", "Sofia", "Isabela", "Maria", "Larissa", "Beatriz", "Carla", "Renata", "Aline", "Vanessa", "Gabriela", "Bruna", "Mariana", "Letícia", "Amanda", "Bianca"];
 
   const comentarios = [
     "Produto excelente, recomendo!",
@@ -33,19 +36,9 @@ function Product() {
     "Atendeu minhas expectativas.",
     "Muito bonito e funcional.",
     "Entrega rápida!",
-    "Perfeito!",
-    "Superou minhas expectativas!",
-    "Produto de ótima qualidade, recomendo a todos!",
-    "Chegou antes do prazo e em perfeito estado, muito satisfeito!",
-    "Excelente custo-benefício, vale cada centavo!",
-    "Produto incrível, superou minhas expectativas!",
-    "Entrega rápida e atendimento excelente, recomendo!",
-    "Produto de alta qualidade, estou muito satisfeito com a compra!",
-    "Recomendo a todos, produto excelente e entrega rápida!",
-
+    "Perfeito!"
   ];
 
-  
   function gerarReviews() {
     return Array.from({ length: 4 }, () => {
       const isHomem = Math.random() > 0.5;
@@ -64,13 +57,10 @@ function Product() {
         nome,
         nota,
         comentario,
-        foto: `https://randomuser.me/api/portraits/${
-          isHomem ? "men" : "women"
-        }/${fotoId}.jpg`
+        foto: `https://randomuser.me/api/portraits/${isHomem ? "men" : "women"}/${fotoId}.jpg`
       };
     });
   }
-
 
   useEffect(() => {
     setReviews(gerarReviews());
@@ -93,12 +83,10 @@ function Product() {
 
       <div className="product-container">
 
-        
         <div className="product-image">
           <img src={product.image} alt={product.title} />
         </div>
 
-       
         <div className="product-info">
           <h1 className="title">{product.title}</h1>
 
@@ -111,23 +99,22 @@ function Product() {
             })}
           </h2>
 
-         
           <div className="frete-box">
             {cep ? (
               <span className="frete">{frete || "Frete calculado"}</span>
             ) : (
-              <span className="frete-warning">Informe seu CEP para calcular o frete</span>
+              <span className="frete-warning">
+                Informe seu CEP para calcular o frete
+              </span>
             )}
           </div>
 
-        
           <div className="quantidade-box">
             <button onClick={diminuir}>-</button>
             <span>{quantidade}</span>
             <button onClick={aumentar}>+</button>
           </div>
 
-        
           <div className="actions">
             <button className="add-cart">
               Adicionar ao carrinho
@@ -138,16 +125,13 @@ function Product() {
             </button>
           </div>
 
-  
           <div className="rating-box">
             <span>⭐ {product.rating?.rate}</span>
             <span>({product.rating?.count} avaliações)</span>
           </div>
-
         </div>
       </div>
 
- 
       <div className="reviews">
         <h2>Avaliações dos clientes</h2>
 
@@ -169,4 +153,3 @@ function Product() {
 }
 
 export default Product;
-

@@ -12,7 +12,6 @@ function Product() {
   const cep = localStorage.getItem("cep");
   const frete = localStorage.getItem("frete");
 
-  // 🔥 AGORA USANDO SERVICE
   useEffect(() => {
     async function loadProduct() {
       const data = await getProductById(id);
@@ -22,7 +21,7 @@ function Product() {
     loadProduct();
   }, [id]);
 
-  // -------- REVIEWS --------
+
   const homens = ["Carlos", "Marcos", "Lucas", "Rafael", "Bruno", "Gustavo", "Felipe", "Leonardo", "Matheus", "Thiago", "Eduardo", "Rodrigo", "André", "Diego", "Vitor", "Samuel", "Fernando", "Alexandre", "Ricardo", "Guilherme"];
   const mulheres = ["Ana", "Juliana", "Fernanda", "Patrícia", "Camila", "Sofia", "Isabela", "Maria", "Larissa", "Beatriz", "Carla", "Renata", "Aline", "Vanessa", "Gabriela", "Bruna", "Mariana", "Letícia", "Amanda", "Bianca"];
 
@@ -84,7 +83,7 @@ function Product() {
       <div className="product-container">
 
         <div className="product-image">
-          <img src={product.image} alt={product.title} />
+         <img src={product.thumbnail} />
         </div>
 
         <div className="product-info">

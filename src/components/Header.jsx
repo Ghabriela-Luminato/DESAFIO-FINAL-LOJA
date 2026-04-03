@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
+import { getCepData } from "../services/cep";
 
 function Header({ setSearch }) {
   const navigate = useNavigate();
@@ -38,45 +39,43 @@ function Header({ setSearch }) {
       setUser(loggedUser);
     }
   }, []);
+function buscarCep(valor) {
+  let valorFormatado = valor
+    .replace(/\D/g, "")
+    .replace(/^(\d{5})(\d)/, "$1-$2")
+    .slice(0, 9);
 
-  function buscarCep(valor) {
-    let valorFormatado = valor
-      .replace(/\D/g, "")
-      .replace(/^(\d{5})(\d)/, "$1-$2")
-      .slice(0, 9);
+  setCep(valorFormatado);
 
-    setCep(valorFormatado);
+  const cepLimpo = valorFormatado.replace("-", "");
 
-    const cepLimpo = valorFormatado.replace("-", "");
+  if (cepLimpo.length !== 8) return;
 
-    if (cepLimpo.length !== 8) return;
+  getCepData(cepLimpo)
+    .then(data => {
+      if (data.erro) {
+        setCidade("CEP não encontrado");
+        setFrete("");
+      } else {
+        let rua = data.logradouro || data.localidade;
 
-    fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.erro) {
-          setCidade("CEP não encontrado");
-          setFrete("");
+        let ruaCurta =
+          rua.length > 12
+            ? rua.substring(0, rua.lastIndexOf(" ", 12)) + "..."
+            : rua;
+
+        setCidade(ruaCurta);
+
+        if (data.uf === "MG") {
+          setFrete("FRETE GRÁTIS!");
         } else {
-          let rua = data.logradouro || data.localidade;
-
-          let ruaCurta =
-            rua.length > 12
-              ? rua.substring(0, rua.lastIndexOf(" ", 12)) + "..."
-              : rua;
-
-          setCidade(ruaCurta);
-
-          if (data.uf === "MG") {
-            setFrete("FRETE GRÁTIS!");
-          } else {
-            setFrete("FRETE CALCULADO!");
-          }
+          setFrete("FRETE CALCULADO!");
         }
-      })
-      .catch(() => {
-        setCidade("Erro ao buscar CEP");
-      });
+      }
+    })
+    .catch(() => {
+      setCidade("Erro ao buscar CEP");
+    });
   }
 
   function limparCep() {

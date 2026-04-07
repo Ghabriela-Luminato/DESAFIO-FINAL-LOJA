@@ -37,7 +37,7 @@ Além do desenvolvimento, **toda a identidade visual do projeto foi criada por m
 
 Os produtos foram consumidos da API:
 
-👉 https://fakestoreapi.com/
+👉 https://dummyjson.com/
 
 ---
 

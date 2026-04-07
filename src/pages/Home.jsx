@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useLocation } from "react-router-dom";
-import { getProducts } from "../services/api"; // 🔥 IMPORTANTE
+import { getProducts } from "../services/api"; 
 
 function Home({ search }) {
   const [products, setProducts] = useState([]);
@@ -10,7 +10,7 @@ function Home({ search }) {
 
   const location = useLocation();
 
-  // 🔹 pega categoria da URL
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const cat = params.get("cat");
@@ -22,13 +22,13 @@ function Home({ search }) {
     }
   }, [location.search]);
 
-  // 🔥 BUSCA PRODUTOS (AGORA COM SERVICE)
+
   useEffect(() => {
     async function loadProducts() {
       try {
         setLoading(true);
 
-        const data = await getProducts(); // ✅ usando service
+        const data = await getProducts();
 
         let filtered = data;
 

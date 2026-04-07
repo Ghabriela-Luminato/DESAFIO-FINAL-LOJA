@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProductById } from "../services/api"; // 🔥
+import { getProductById } from "../services/api";
 
 function Product() {
   const { id } = useParams();
@@ -12,7 +12,7 @@ function Product() {
   const cep = localStorage.getItem("cep");
   const frete = localStorage.getItem("frete");
 
-  // 🔥 AGORA USANDO SERVICE
+
   useEffect(() => {
     async function loadProduct() {
       const data = await getProductById(id);
@@ -84,7 +84,8 @@ function Product() {
       <div className="product-container">
 
         <div className="product-image">
-          <img src={product.image} alt={product.title} />
+        
+          <img src={product.thumbnail} alt={product.title} />
         </div>
 
         <div className="product-info">
@@ -126,8 +127,9 @@ function Product() {
           </div>
 
           <div className="rating-box">
-            <span>⭐ {product.rating?.rate}</span>
-            <span>({product.rating?.count} avaliações)</span>
+         
+            <span>⭐ {product.rating}</span>
+            <span>({product.stock} avaliações)</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProducts } from "../services/api"; // 🔥
+import { getProducts } from "../services/api"; 
 
 import Carousel from "../components/Carousel.jsx";
 import PageTransition from "../components/PageTransition.jsx";
@@ -20,7 +20,7 @@ function Principal() {
 
     async function loadProducts() {
       try {
-        const data = await getProducts(); // ✅ USANDO SERVICE
+        const data = await getProducts(); 
 
         if (mounted) {
           setProducts(data);

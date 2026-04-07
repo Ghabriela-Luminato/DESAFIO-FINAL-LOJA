@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-
-
 function ProductCard({ product }) {
   const price = product.price;
 
@@ -20,16 +18,18 @@ function ProductCard({ product }) {
     currency: "BRL"
   });
 
-  const rating = product.rating?.rate || 0;
-  const ratingCount = product.rating?.count || 0;
+  
+  const rating = product.rating || 0;
+  const ratingCount = product.stock || 0; 
 
   return (
     <div className="card">
 
       <Link to={`/product/${product.id}`} className="card-link">
 
+   
         <img
-          src={product.image}
+          src={product.thumbnail}
           alt={product.title}
           className="card-img"
         />

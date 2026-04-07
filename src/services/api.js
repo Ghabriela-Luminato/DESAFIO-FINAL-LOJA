@@ -14,3 +14,7 @@ export async function getProductsByCategory(id) {
   const res = await fetch(`${BASE_URL}/categories/${id}/products`);
   return res.json();
 }
+export async function getProductById(id) {
+  const res = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`);
+  return res.json();
+}

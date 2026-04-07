@@ -41,5 +41,5 @@ const imgStyle = {
   width: "100%",
   height: "500px",
   objectFit: "cover",
-  borderRadius: "15px",
+  borderRadius: "5px",
 };

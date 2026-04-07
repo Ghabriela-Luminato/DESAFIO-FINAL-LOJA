@@ -1046,27 +1046,13 @@ color: #000;
   color: #444;
   transition: 0.3s;
 }
-
-
 .categoria-item:hover .categoria-icon {
-  transform: translateY(-10px) scale(1.05);
-  background: linear-gradient(135deg, #016e08, #000000);
-
- 
-  box-shadow: 0 15px 30px rgba(106, 0, 255, 0.3);
+  transform: translateY(-8px);
 }
-
 
 .categoria-item:hover .categoria-icon img {
-  transform: scale(1.1);
-  filter: brightness(0) invert(1);
-}
-
-.categoria-item:hover span {
-  color: #000;
-}
-
-/*__________________________________________________________________________*/
+  transform: scale(1.05);
+}_______________________________________________________________*/
 
 
 /*Oferta do dia*/

@@ -4,46 +4,47 @@ import ProductCard from "./ProductCard";
 function DailyDeals({ products }) {
   const [deals, setDeals] = useState([]);
 
-  function getRandomProducts(list, count = 4) {
-    const shuffled = [...list].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, Math.min(count, list.length));
-  }
-
   useEffect(() => {
     if (!products || products.length === 0) return;
 
-    const saved = localStorage.getItem("dailyDeals");
-    const savedDate = localStorage.getItem("dailyDealsDate");
+    const categorias = [
+      "smartphones",
+      "laptops",
+      "fragrances",
+      "skincare",
+      "home-decoration"
+    ];
 
-    const today = new Date().toDateString();
+    let selecionados = [];
 
-  
-    if (saved && savedDate === today) {
-      try {
-        setDeals(JSON.parse(saved));
-        return;
-      } catch {
-        localStorage.removeItem("dailyDeals");
+    
+    categorias.forEach((cat) => {
+      const lista = products.filter(
+        (p) =>
+          p.category &&
+          p.category.toLowerCase().trim() === cat
+      );
+
+      if (lista.length > 0) {
+        const random =
+          lista[Math.floor(Math.random() * lista.length)];
+
+        selecionados.push(random);
       }
-    }
+    });
 
+    
+    const final = selecionados
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 4);
 
-    const validProducts = products.filter(
-      (p) => p && p.id && p.title && p.price
-    );
-
-    const newDeals = getRandomProducts(validProducts, 4);
-
-    setDeals(newDeals);
-
-    localStorage.setItem("dailyDeals", JSON.stringify(newDeals));
-    localStorage.setItem("dailyDealsDate", today);
+    setDeals(final);
 
   }, [products]);
 
   return (
     <div className="deals-container">
-      
+
       <div className="deals-header">
         <h2 className="deals-title">
           Ofertas do dia para aproveitar 🔥

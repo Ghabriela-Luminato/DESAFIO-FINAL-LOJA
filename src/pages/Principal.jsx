@@ -89,8 +89,8 @@ function Principal() {
 
             <Link to="/produtos?cat=skincare">
               <button>
-                <i className="fa-solid fa-face-smile"></i>
-                Skincare
+             <i className="fa-solid fa-wand-magic-sparkles"></i>
+                Beleza
               </button>
             </Link>
 

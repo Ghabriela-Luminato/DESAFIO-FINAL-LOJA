@@ -4,8 +4,8 @@ import ele1 from "../assets/ele1.png";
 import ele2 from "../assets/ele2.png";
 import ele3 from "../assets/ele3.png";
 import ele4 from "../assets/ele4.png";
-import ele5 from "../assets/ele1.png"; 
-
+import ele5 from "../assets/ele5.png"; 
+import ele6 from "../assets/ele6.png"; 
 export default function Categorias() {
   const categorias = [
     {
@@ -30,13 +30,13 @@ export default function Categorias() {
       to: "/produtos?cat=fragrances",
     },
     {
-      nome: "Skincare",
+      nome: "Beleza",
       img: ele5,
       to: "/produtos?cat=skincare",
     },
     {
       nome: "Casa",
-      img: ele5,
+      img: ele6,
       to: "/produtos?cat=home-decoration",
     },
   ];

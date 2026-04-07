@@ -157,8 +157,8 @@ function Home({ search }) {
         </button>
 
         <button onClick={() => setCategory("skincare")} className={category==="skincare"?"active":""}>
-          <i className="fa-solid fa-face-smile"></i>
-          Skincare
+       <i className="fa-solid fa-wand-magic-sparkles"></i>
+        Beleza
         </button>
 
         <button onClick={() => setCategory("home-decoration")} className={category==="home-decoration"?"active":""}>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProducts } from "../services/api";
+import { getProducts } from "../services/api"; // 🔥
 
 import Carousel from "../components/Carousel.jsx";
 import PageTransition from "../components/PageTransition.jsx";
@@ -20,27 +20,10 @@ function Principal() {
 
     async function loadProducts() {
       try {
-        const data = await getProducts();
-
-        
-        const allowedCategories = [
-          "clothes",
-          "electronics",
-          "furniture",
-          "shoes",
-          "others"
-        ];
-
-        const filtered = data.filter((product) =>
-          allowedCategories.includes(
-            product.category?.name?.toLowerCase()
-          ) &&
-          product.images?.length > 0 &&
-          product.title
-        );
+        const data = await getProducts(); // ✅ USANDO SERVICE
 
         if (mounted) {
-          setProducts(filtered);
+          setProducts(data);
           setLoading(false);
         }
       } catch (err) {
@@ -65,7 +48,7 @@ function Principal() {
       <>
         <div className="container">
 
-          {/* 🔹 MENU */}
+          {/* ================= MENU ================= */}
           <div className="filters">
             <Link to="/produtos">
               <button>
@@ -101,34 +84,18 @@ function Principal() {
                 Feminino
               </button>
             </Link>
-
-            <Link to="/produtos?cat=skincare">
-              <button>
-                <i className="fa-solid fa-pump-soap"></i>
-                Skincare
-              </button>
-            </Link>
           </div>
 
-          {/* 🔹 CARROSSEL */}
           <div className="carousel-wrapper">
             <Carousel />
           </div>
 
-          {/* 🔹 OFERTAS */}
-          {loading ? (
-            <p style={{ textAlign: "center" }}>Carregando ofertas...</p>
-          ) : error ? (
-            <p style={{ textAlign: "center" }}>
-              Erro ao carregar produtos
-            </p>
-          ) : (
-            <DailyDeals products={products} />
-          )}
+          <DailyDeals products={products} />
 
-          {/* 🔹 OUTRAS SEÇÕES */}
           <Categorias />
+
           <Reviews />
+
           <SecurePayment />
         </div>
 

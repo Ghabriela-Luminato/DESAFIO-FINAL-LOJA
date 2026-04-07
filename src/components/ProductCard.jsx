@@ -28,8 +28,8 @@ function ProductCard({ product }) {
 
       <Link to={`/product/${product.id}`} className="card-link">
 
-        
-        <img src={product.thumbnail} 
+        <img
+          src={product.image}
           alt={product.title}
           className="card-img"
         />

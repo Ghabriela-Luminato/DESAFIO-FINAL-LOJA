@@ -1,20 +1,14 @@
-const BASE_URL = "https://api.escuelajs.co/api/v1";
+const BASE_URL = "https://dummyjson.com";
+
 
 export async function getProducts() {
   const res = await fetch(`${BASE_URL}/products`);
-  return res.json();
+  const data = await res.json();
+  return data.products; 
 }
 
-export async function getCategories() {
-  const res = await fetch(`${BASE_URL}/categories`);
-  return res.json();
-}
 
-export async function getProductsByCategory(id) {
-  const res = await fetch(`${BASE_URL}/categories/${id}/products`);
-  return res.json();
-}
 export async function getProductById(id) {
-  const res = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`);
+  const res = await fetch(`${BASE_URL}/products/${id}`);
   return res.json();
 }

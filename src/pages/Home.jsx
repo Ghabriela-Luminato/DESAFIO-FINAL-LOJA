@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useLocation } from "react-router-dom";
-import { getProducts } from "../services/api";
+import { getProducts } from "../services/api"; // 🔥 IMPORTANTE
 
 function Home({ search }) {
   const [products, setProducts] = useState([]);
@@ -10,7 +10,7 @@ function Home({ search }) {
 
   const location = useLocation();
 
- 
+  // 🔹 pega categoria da URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const cat = params.get("cat");
@@ -22,45 +22,19 @@ function Home({ search }) {
     }
   }, [location.search]);
 
+  // 🔥 BUSCA PRODUTOS (AGORA COM SERVICE)
   useEffect(() => {
     async function loadProducts() {
       try {
         setLoading(true);
 
-        const data = await getProducts();
+        const data = await getProducts(); // ✅ usando service
 
-      
-        const allowedCategories = [
-          "clothes",
-          "electronics",
-          "furniture",
-          "shoes",
-          "others"
-        ];
+        let filtered = data;
 
-        const categoryMap = {
-          electronics: ["electronics"],
-          jewelery: ["others"],
-          "men's clothing": ["clothes"],
-          "women's clothing": ["clothes"],
-          skincare: ["others"]
-        };
-
-     
-        let filtered = data.filter((product) =>
-          allowedCategories.includes(
-            product.category?.name?.toLowerCase()
-          )
-        );
-
-   
         if (category !== "all") {
-          const mapped = categoryMap[category] || [];
-
-          filtered = filtered.filter((product) =>
-            mapped.includes(
-              product.category?.name?.toLowerCase()
-            )
+          filtered = data.filter(
+            (product) => product.category === category
           );
         }
 
@@ -120,14 +94,6 @@ function Home({ search }) {
           <i className="fa-solid fa-bag-shopping"></i>
           Feminino
         </button>
-
-        <button
-          className={category === "skincare" ? "active" : ""}
-          onClick={() => setCategory("skincare")}
-        >
-          <i className="fa-solid fa-pump-soap"></i>
-          Skincare
-        </button>
       </div>
 
       {/* 🔹 PRODUTOS */}
@@ -141,11 +107,9 @@ function Home({ search }) {
               camisa: "shirt",
               bolsa: "bag",
               relogio: "watch",
-              joia: "jewellery",
+              joia: "jewelery",
               feminino: "women",
               masculino: "men",
-              perfume: "perfume",
-              creme: "cream"
             };
 
             const termo = traduzir[searchText] || searchText;
@@ -153,7 +117,7 @@ function Home({ search }) {
             return (
               product.title?.toLowerCase().includes(termo) ||
               product.description?.toLowerCase().includes(termo) ||
-              product.category?.name?.toLowerCase().includes(termo)
+              product.category?.toLowerCase().includes(termo)
             );
           })
           .map((product) => (

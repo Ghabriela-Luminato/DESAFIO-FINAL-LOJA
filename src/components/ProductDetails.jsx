@@ -25,12 +25,8 @@ function ProductDetails() {
     <div className="product-page">
       <div className="product-container">
 
-
         <div className="product-image">
-          <img
-            src={product.images?.[0] || "https://via.placeholder.com/300"}
-            alt={product.title}
-          />
+          <img src={product.image} alt={product.title} />
         </div>
 
         <div className="product-info">

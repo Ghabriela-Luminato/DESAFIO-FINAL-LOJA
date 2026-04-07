@@ -22,24 +22,21 @@ function Principal() {
       try {
         const data = await getProducts();
 
-        // 🔥 categorias permitidas (SEM COMIDA)
+        
         const allowedCategories = [
-          "smartphones",
-          "laptops",
-          "mens-shirts",
-          "mens-shoes",
-          "womens-dresses",
-          "womens-shoes",
-          "womens-bags",
-          "mens-watches",
-          "womens-jewellery",
-          "skincare",
-          "fragrances"
+          "clothes",
+          "electronics",
+          "furniture",
+          "shoes",
+          "others"
         ];
 
-        // 🔥 filtra produtos
         const filtered = data.filter((product) =>
-          allowedCategories.includes(product.category)
+          allowedCategories.includes(
+            product.category?.name?.toLowerCase()
+          ) &&
+          product.images?.length > 0 &&
+          product.title
         );
 
         if (mounted) {
@@ -105,7 +102,6 @@ function Principal() {
               </button>
             </Link>
 
-            {/* 🔥 NOVO */}
             <Link to="/produtos?cat=skincare">
               <button>
                 <i className="fa-solid fa-pump-soap"></i>
@@ -124,7 +120,7 @@ function Principal() {
             <p style={{ textAlign: "center" }}>Carregando ofertas...</p>
           ) : error ? (
             <p style={{ textAlign: "center" }}>
-              Erro ao carregar produtos 
+              Erro ao carregar produtos
             </p>
           ) : (
             <DailyDeals products={products} />

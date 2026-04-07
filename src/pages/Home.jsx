@@ -10,7 +10,7 @@ function Home({ search }) {
 
   const location = useLocation();
 
-  // 🔹 pegar categoria da URL
+ 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const cat = params.get("cat");
@@ -22,7 +22,6 @@ function Home({ search }) {
     }
   }, [location.search]);
 
-  // 🔥 carregar produtos + filtro
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -30,41 +29,38 @@ function Home({ search }) {
 
         const data = await getProducts();
 
-        // 🔥 categorias permitidas
+      
         const allowedCategories = [
-          "smartphones",
-          "laptops",
-          "mens-shirts",
-          "mens-shoes",
-          "womens-dresses",
-          "womens-shoes",
-          "womens-bags",
-          "mens-watches",
-          "womens-jewellery",
-          "skincare",
-          "fragrances"
+          "clothes",
+          "electronics",
+          "furniture",
+          "shoes",
+          "others"
         ];
 
-        // 🔥 mapeamento das categorias do seu layout
         const categoryMap = {
-          electronics: ["smartphones", "laptops"],
-          jewelery: ["mens-watches", "womens-jewellery"],
-          "men's clothing": ["mens-shirts", "mens-shoes"],
-          "women's clothing": ["womens-dresses", "womens-shoes"],
-          skincare: ["skincare", "fragrances"]
+          electronics: ["electronics"],
+          jewelery: ["others"],
+          "men's clothing": ["clothes"],
+          "women's clothing": ["clothes"],
+          skincare: ["others"]
         };
 
-        // 🔥 remove categorias indesejadas
+     
         let filtered = data.filter((product) =>
-          allowedCategories.includes(product.category)
+          allowedCategories.includes(
+            product.category?.name?.toLowerCase()
+          )
         );
 
-        // 🔥 aplica filtro dos botões
+   
         if (category !== "all") {
           const mapped = categoryMap[category] || [];
 
           filtered = filtered.filter((product) =>
-            mapped.includes(product.category)
+            mapped.includes(
+              product.category?.name?.toLowerCase()
+            )
           );
         }
 
@@ -125,7 +121,6 @@ function Home({ search }) {
           Feminino
         </button>
 
-        {/* 🔥 NOVO BOTÃO */}
         <button
           className={category === "skincare" ? "active" : ""}
           onClick={() => setCategory("skincare")}
@@ -149,8 +144,8 @@ function Home({ search }) {
               joia: "jewellery",
               feminino: "women",
               masculino: "men",
-              perfume: "fragrance",
-              creme: "skincare"
+              perfume: "perfume",
+              creme: "cream"
             };
 
             const termo = traduzir[searchText] || searchText;
@@ -158,7 +153,7 @@ function Home({ search }) {
             return (
               product.title?.toLowerCase().includes(termo) ||
               product.description?.toLowerCase().includes(termo) ||
-              product.category?.toLowerCase().includes(termo)
+              product.category?.name?.toLowerCase().includes(termo)
             );
           })
           .map((product) => (

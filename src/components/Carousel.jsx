@@ -5,12 +5,12 @@ import { memo } from "react";
 import img1 from "../assets/carrosel1.svg";
 import img2 from "../assets/carrosel2.svg";
 import img3 from "../assets/carrosel3.svg";
-
+import img4 from "../assets/carrosel4.svg";
 import "swiper/css";
 import "swiper/css/pagination";
 
 function Carrossel() {
-  const imagens = [img1, img2, img3];
+  const imagens = [img1, img4, img2, img3];
 
   return (
     <div style={{ margin: "20px 0" }}>

@@ -1,9 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById } from "../services/api";
+import { useCart } from "../context/CartContext";
 
 function Product() {
   const { id } = useParams();
+
+  const { addToCart } = useCart();
 
   const [product, setProduct] = useState(null);
   const [quantidade, setQuantidade] = useState(1);
@@ -11,7 +14,6 @@ function Product() {
 
   const cep = localStorage.getItem("cep");
   const frete = localStorage.getItem("frete");
-
 
   useEffect(() => {
     async function loadProduct() {
@@ -22,9 +24,8 @@ function Product() {
     loadProduct();
   }, [id]);
 
-  // -------- REVIEWS --------
-  const homens = ["Carlos", "Marcos", "Lucas", "Rafael", "Bruno", "Gustavo", "Felipe", "Leonardo", "Matheus", "Thiago", "Eduardo", "Rodrigo", "André", "Diego", "Vitor", "Samuel", "Fernando", "Alexandre", "Ricardo", "Guilherme"];
-  const mulheres = ["Ana", "Juliana", "Fernanda", "Patrícia", "Camila", "Sofia", "Isabela", "Maria", "Larissa", "Beatriz", "Carla", "Renata", "Aline", "Vanessa", "Gabriela", "Bruna", "Mariana", "Letícia", "Amanda", "Bianca"];
+  const homens = ["Carlos","Marcos","Lucas","Rafael","Bruno","Gustavo","Felipe","Leonardo","Matheus","Thiago"];
+  const mulheres = ["Ana","Juliana","Fernanda","Patrícia","Camila","Sofia","Isabela","Maria","Larissa","Beatriz"];
 
   const comentarios = [
     "Produto excelente, recomendo!",
@@ -33,8 +34,6 @@ function Product() {
     "Qualidade acima do esperado.",
     "Gostei bastante, compraria de novo.",
     "Vale muito a pena!",
-    "Atendeu minhas expectativas.",
-    "Muito bonito e funcional.",
     "Entrega rápida!",
     "Perfeito!"
   ];
@@ -67,12 +66,18 @@ function Product() {
   }, [id]);
 
   function aumentar() {
-    setQuantidade(q => q + 1);
+    setQuantidade((q) => q + 1);
   }
 
   function diminuir() {
     if (quantidade > 1) {
-      setQuantidade(q => q - 1);
+      setQuantidade((q) => q - 1);
+    }
+  }
+
+  function adicionarCarrinho() {
+    for (let i = 0; i < quantidade; i++) {
+      addToCart(product);
     }
   }
 
@@ -84,11 +89,11 @@ function Product() {
       <div className="product-container">
 
         <div className="product-image">
-        
           <img src={product.thumbnail} alt={product.title} />
         </div>
 
         <div className="product-info">
+
           <h1 className="title">{product.title}</h1>
 
           <p className="desc">{product.description}</p>
@@ -102,7 +107,9 @@ function Product() {
 
           <div className="frete-box">
             {cep ? (
-              <span className="frete">{frete || "Frete calculado"}</span>
+              <span className="frete">
+                {frete || "Frete calculado"}
+              </span>
             ) : (
               <span className="frete-warning">
                 Informe seu CEP para calcular o frete
@@ -117,20 +124,28 @@ function Product() {
           </div>
 
           <div className="actions">
-            <button className="add-cart">
+
+            <button
+              className="add-cart"
+              onClick={adicionarCarrinho}
+            >
               Adicionar ao carrinho
             </button>
 
-            <button className="buy">
+            <button
+              className="buy"
+              onClick={adicionarCarrinho}
+            >
               Comprar agora
             </button>
+
           </div>
 
           <div className="rating-box">
-         
             <span>⭐ {product.rating}</span>
             <span>({product.stock} avaliações)</span>
           </div>
+
         </div>
       </div>
 
@@ -148,6 +163,7 @@ function Product() {
             </div>
           </div>
         ))}
+
       </div>
 
     </div>

@@ -1705,174 +1705,348 @@ body.dark .quantidade-box {
 }
 
 
-
 /* =========================
-   CARRINHO LATERAL
+   CARRINHO PREMIUM PRO
 ========================= */
 
 .cartSidebar{
 position:fixed;
 top:0;
 right:-430px;
-width:400px;
+width:410px;
 max-width:100%;
 height:100vh;
-background:#ffffff;
+background:#fff;
 z-index:9999;
-box-shadow:-8px 0 25px rgba(0,0,0,.15);
-transition:all .35s ease;
-padding:20px;
+box-shadow:-10px 0 30px rgba(0,0,0,.14);
+transition:.35s ease;
+padding:22px;
 overflow-y:auto;
 display:flex;
 flex-direction:column;
 }
 
+/* MELHORADO */
 .cartSidebar.open{
 right:0;
+box-shadow:-20px 0 60px rgba(0,0,0,.2);
 }
+
+/* =========================
+   TOPO
+========================= */
 
 .cartHeader{
 display:flex;
-align-items:center;
+align-items:flex-start;
 justify-content:space-between;
-padding-bottom:15px;
-border-bottom:1px solid #eee;
-margin-bottom:20px;
+padding-bottom:18px;
+border-bottom:1px solid #f1f1f1;
+margin-bottom:18px;
 }
 
 .cartHeader h2{
-font-size:22px;
-font-weight:700;
-color:#111;
+font-size:21px;
+font-weight:900;
 margin:0;
+color:#111;
+}
+
+.cartHeader span{
+font-size:13px;
+color:#888;
+font-weight:600;
 }
 
 .cartHeader button{
-width:34px;
-height:34px;
+width:40px;
+height:40px;
 border:none;
 border-radius:50%;
-background:#f3f3f3;
+background:#f5f5f5;
 cursor:pointer;
-font-size:16px;
-font-weight:bold;
+font-size:18px;
+font-weight:900;
 transition:.2s;
 }
 
 .cartHeader button:hover{
-background:#e2e2e2;
+background:#ececec;
+transform:scale(1.05);
 }
+
+/* =========================
+   CARRINHO VAZIO
+========================= */
 
 .emptyCart{
 text-align:center;
-margin-top:60px;
-font-size:18px;
+margin-top:90px;
+font-size:17px;
+font-weight:600;
 color:#777;
 }
 
+/* =========================
+   ITEM
+========================= */
+
 .cartItem{
 display:flex;
-gap:12px;
-padding:15px 0;
-border-bottom:1px solid #f0f0f0;
+gap:14px;
+padding:16px 0;
+border-bottom:1px solid #f3f3f3;
+transition:.2s; /* NOVO */
+}
+
+/* NOVO (feedback visual) */
+.cartItem:hover{
+transform:translateX(-3px);
 }
 
 .cartItem img{
-width:75px;
-height:75px;
+width:86px;
+height:86px;
 object-fit:cover;
-border-radius:10px;
+border-radius:14px;
 background:#fafafa;
+padding:4px;
 }
 
-.cartItem h4{
+.cartInfo{
+flex:1;
+}
+
+.cartInfo h4{
 font-size:14px;
-font-weight:600;
+font-weight:800;
+line-height:1.35;
+margin:0 0 7px;
 color:#111;
-margin:0 0 6px;
-line-height:1.3;
 }
 
-.cartItem p{
-font-size:16px;
-font-weight:700;
-color:#000;
+.cartInfo p{
+font-size:18px;
+font-weight:900;
 margin:0 0 10px;
+color:#111;
 }
+
+.cartInfo small{
+display:block;
+font-size:12px;
+color:#666;
+margin-bottom:10px;
+font-weight:700;
+}
+
+/* =========================
+   QUANTIDADE
+========================= */
 
 .qty{
 display:flex;
 align-items:center;
 gap:8px;
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
 .qty button{
-width:28px;
-height:28px;
+width:34px;
+height:34px;
 border:none;
 background:#f2f2f2;
-border-radius:6px;
+border-radius:10px;
 cursor:pointer;
-font-size:16px;
-font-weight:bold;
+font-size:18px;
+font-weight:900;
 transition:.2s;
 }
 
 .qty button:hover{
-background:#ddd;
+background:#e6e6e6;
+transform:scale(1.05); /* MELHORADO */
 }
 
 .qty span{
-min-width:20px;
+min-width:22px;
 text-align:center;
-font-weight:700;
+font-size:15px;
+font-weight:900;
 }
+
+/* =========================
+   REMOVER
+========================= */
 
 .removeBtn{
 border:none;
 background:none;
-color:#ff3c3c;
+color:#ff3333;
 cursor:pointer;
-font-size:13px;
 padding:0;
-font-weight:600;
+font-size:13px;
+font-weight:800;
 }
 
 .removeBtn:hover{
 text-decoration:underline;
 }
 
-.cartTotal{
-margin-top:auto;
-padding-top:20px;
-font-size:22px;
+/* =========================
+   FRETE / CUPOM (NOVO)
+========================= */
+
+.freeShipping{
+background:#ecfdf5;
+color:#059669;
+padding:10px;
+border-radius:10px;
+font-size:13px;
 font-weight:800;
-color:#111;
-border-top:2px solid #eee;
+margin-bottom:12px;
+text-align:center;
 }
 
-.finishBtn{
-margin-top:15px;
-width:100%;
-padding:15px;
-border:none;
-border-radius:12px;
-background:#111;
-color:#fff;
-font-size:16px;
+/* =========================
+   ENTREGA (NOVO)
+========================= */
+
+.shippingOptions{
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-bottom:14px;
+}
+
+.shippingOptions label{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:13px;
 font-weight:700;
+color:#333;
+background:#fafafa;
+padding:10px;
+border-radius:10px;
 cursor:pointer;
 transition:.2s;
 }
 
-.finishBtn:hover{
-transform:translateY(-2px);
-opacity:.92;
+/* MELHORADO */
+.shippingOptions label:hover{
+background:#f1f1f1;
 }
 
 /* =========================
-   ICONE HEADER
+   CUPOM (NOVO)
+========================= */
+
+.couponBox{
+display:flex;
+flex-direction:column;
+gap:6px;
+margin-bottom:14px;
+}
+
+.couponBox input{
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+font-size:13px;
+font-weight:600;
+outline:none;
+}
+
+/* MELHORADO */
+.couponBox input:focus{
+border-color:#111;
+}
+
+.couponBox span{
+font-size:12px;
+font-weight:700;
+color:#16a34a;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.cartFooter{
+margin-top:auto;
+padding-top:22px;
+border-top:2px solid #f2f2f2;
+}
+
+.cartResume{
+display:flex;
+justify-content:space-between;
+font-size:14px;
+font-weight:700;
+margin-bottom:10px;
+color:#555;
+}
+
+/* NOVO (desconto visual) */
+.cartResume span:last-child{
+font-weight:800;
+}
+
+.cartTotal{
+display:flex;
+justify-content:space-between;
+font-size:24px;
+font-weight:900;
+color:#111;
+margin-top:12px;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+/* NOVO */
+.continueBtn{
+margin-top:10px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#f3f3f3;
+color:#111;
+font-size:14px;
+font-weight:800;
+cursor:pointer;
+transition:.25s;
+}
+
+.continueBtn:hover{
+background:#e8e8e8;
+}
+
+/* MELHORADO */
+.finishBtn{
+margin-top:10px;
+width:100%;
+padding:17px;
+border:none;
+border-radius:16px;
+background:#111;
+color:#fff;
+font-size:16px;
+font-weight:900;
+cursor:pointer;
+transition:.25s;
+}
+
+.finishBtn:hover{
+transform:translateY(-2px);
+opacity:.95;
+}
+
+/* =========================
+   HEADER ICON
 ========================= */
 
 .cartArea{
@@ -1885,22 +2059,23 @@ justify-content:center;
 
 .cartCount{
 position:absolute;
-top:-7px;
-right:-10px;
-width:19px;
-height:19px;
+top:-8px;
+right:-11px;
+width:21px;
+height:21px;
 border-radius:50%;
-background:#ff2d2d;
+background:#ff2c2c;
 color:#fff;
 font-size:11px;
-font-weight:700;
+font-weight:900;
 display:flex;
 align-items:center;
 justify-content:center;
+box-shadow:0 4px 8px rgba(255,0,0,.22);
 }
 
 /* =========================
-   RESPONSIVO
+   MOBILE
 ========================= */
 
 @media(max-width:768px){
@@ -1908,24 +2083,24 @@ justify-content:center;
 .cartSidebar{
 width:100%;
 right:-100%;
-padding:16px;
-}
-
-.cartHeader h2{
-font-size:20px;
+padding:18px;
 }
 
 .cartItem img{
-width:65px;
-height:65px;
+width:72px;
+height:72px;
+}
+
+.cartHeader h2{
+font-size:18px;
 }
 
 .cartTotal{
-font-size:20px;
+font-size:22px;
 }
 
 .finishBtn{
-padding:14px;
+padding:15px;
 font-size:15px;
 }
 

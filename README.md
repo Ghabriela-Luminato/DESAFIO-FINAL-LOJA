@@ -79,11 +79,15 @@ http://localhost:5173
 
 ```
 src/
-├── components/   # Componentes reutilizáveis
-├── pages/        # Páginas do sistema
-├── services/     # Consumo de API
-├── styles/       # Estilos globais
-├── assets/       # Imagens e identidade visual
+├── assets/        # Imagens, logos e identidade visual
+├── components/    # Componentes reutilizáveis (Header, Card, Sidebar etc)
+├── context/       # Context API global (Carrinho, usuário, tema...)
+├── hooks/         # Hooks customizados (useCart, useTheme...)
+├── pages/         # Páginas do sistema
+├── services/      # Consumo de API e integrações externas
+├── styles/        # Estilos globais / CSS principal
+├── App.jsx        # Rotas principais da aplicação
+├── main.jsx       # Inicialização React + Vite
 ```
 
 ---

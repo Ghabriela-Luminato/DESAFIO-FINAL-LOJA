@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 function ProductCard({ product }) {
+  const { addToCart } = useCart();
+
   const price = product.price;
 
   const priceFmt = price.toLocaleString("pt-BR", {
@@ -18,16 +21,14 @@ function ProductCard({ product }) {
     currency: "BRL"
   });
 
-  
   const rating = product.rating || 0;
-  const ratingCount = product.stock || 0; 
+  const ratingCount = product.stock || 0;
 
   return (
     <div className="card">
 
       <Link to={`/product/${product.id}`} className="card-link">
 
-   
         <img
           src={product.thumbnail}
           alt={product.title}
@@ -45,6 +46,7 @@ function ProductCard({ product }) {
               </span>
             ))}
           </div>
+
           <span className="rating-count">({ratingCount})</span>
         </div>
 
@@ -60,7 +62,10 @@ function ProductCard({ product }) {
 
       </Link>
 
-      <button className="add-cart">
+      <button
+        className="add-cart"
+        onClick={() => addToCart(product)}
+      >
         Adicionar ao Carrinho
       </button>
 

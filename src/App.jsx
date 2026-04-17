@@ -4,13 +4,13 @@ import { AnimatePresence } from "framer-motion";
 
 import Product from "./pages/Product";
 import Home from "./pages/Home";
-import Principal from "./pages/Principal"; 
+import Principal from "./pages/Principal";
 import Header from "./components/Header.jsx";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
-
 
 import PageTransition from "./components/PageTransition.jsx";
+
+import { CartProvider } from "./context/CartContext";
 
 function Layout({ children, setSearch }) {
   return (
@@ -28,7 +28,6 @@ function AppRoutes({ search, setSearch }) {
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={location.pathname}>
 
-        {/* HOME */}
         <Route
           path="/"
           element={
@@ -38,7 +37,6 @@ function AppRoutes({ search, setSearch }) {
           }
         />
 
-        {/* PRODUTOS */}
         <Route
           path="/produtos"
           element={
@@ -48,7 +46,6 @@ function AppRoutes({ search, setSearch }) {
           }
         />
 
-        {/* DETALHE PRODUTO */}
         <Route
           path="/product/:id"
           element={
@@ -58,17 +55,15 @@ function AppRoutes({ search, setSearch }) {
           }
         />
 
-        {/*  LOGIN */}
         <Route
-  path="/login"
-  element={
-    <PageTransition>
-      <Login />
-    </PageTransition>
-  }
-/>
+          path="/login"
+          element={
+            <PageTransition>
+              <Login />
+            </PageTransition>
+          }
+        />
 
-        {/* REDIRECIONAMENTO */}
         <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>
@@ -80,9 +75,11 @@ function App() {
   const [search, setSearch] = useState("");
 
   return (
-    <BrowserRouter>
-      <AppRoutes search={search} setSearch={setSearch} />
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <AppRoutes search={search} setSearch={setSearch} />
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 

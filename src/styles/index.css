@@ -1703,3 +1703,230 @@ body.dark .old-price {
 body.dark .quantidade-box {
   color: #ffffff;
 }
+
+
+
+/* =========================
+   CARRINHO LATERAL
+========================= */
+
+.cartSidebar{
+position:fixed;
+top:0;
+right:-430px;
+width:400px;
+max-width:100%;
+height:100vh;
+background:#ffffff;
+z-index:9999;
+box-shadow:-8px 0 25px rgba(0,0,0,.15);
+transition:all .35s ease;
+padding:20px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+}
+
+.cartSidebar.open{
+right:0;
+}
+
+.cartHeader{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding-bottom:15px;
+border-bottom:1px solid #eee;
+margin-bottom:20px;
+}
+
+.cartHeader h2{
+font-size:22px;
+font-weight:700;
+color:#111;
+margin:0;
+}
+
+.cartHeader button{
+width:34px;
+height:34px;
+border:none;
+border-radius:50%;
+background:#f3f3f3;
+cursor:pointer;
+font-size:16px;
+font-weight:bold;
+transition:.2s;
+}
+
+.cartHeader button:hover{
+background:#e2e2e2;
+}
+
+.emptyCart{
+text-align:center;
+margin-top:60px;
+font-size:18px;
+color:#777;
+}
+
+.cartItem{
+display:flex;
+gap:12px;
+padding:15px 0;
+border-bottom:1px solid #f0f0f0;
+}
+
+.cartItem img{
+width:75px;
+height:75px;
+object-fit:cover;
+border-radius:10px;
+background:#fafafa;
+}
+
+.cartItem h4{
+font-size:14px;
+font-weight:600;
+color:#111;
+margin:0 0 6px;
+line-height:1.3;
+}
+
+.cartItem p{
+font-size:16px;
+font-weight:700;
+color:#000;
+margin:0 0 10px;
+}
+
+.qty{
+display:flex;
+align-items:center;
+gap:8px;
+margin-bottom:10px;
+}
+
+.qty button{
+width:28px;
+height:28px;
+border:none;
+background:#f2f2f2;
+border-radius:6px;
+cursor:pointer;
+font-size:16px;
+font-weight:bold;
+transition:.2s;
+}
+
+.qty button:hover{
+background:#ddd;
+}
+
+.qty span{
+min-width:20px;
+text-align:center;
+font-weight:700;
+}
+
+.removeBtn{
+border:none;
+background:none;
+color:#ff3c3c;
+cursor:pointer;
+font-size:13px;
+padding:0;
+font-weight:600;
+}
+
+.removeBtn:hover{
+text-decoration:underline;
+}
+
+.cartTotal{
+margin-top:auto;
+padding-top:20px;
+font-size:22px;
+font-weight:800;
+color:#111;
+border-top:2px solid #eee;
+}
+
+.finishBtn{
+margin-top:15px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#111;
+color:#fff;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:.2s;
+}
+
+.finishBtn:hover{
+transform:translateY(-2px);
+opacity:.92;
+}
+
+/* =========================
+   ICONE HEADER
+========================= */
+
+.cartArea{
+position:relative;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.cartCount{
+position:absolute;
+top:-7px;
+right:-10px;
+width:19px;
+height:19px;
+border-radius:50%;
+background:#ff2d2d;
+color:#fff;
+font-size:11px;
+font-weight:700;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:768px){
+
+.cartSidebar{
+width:100%;
+right:-100%;
+padding:16px;
+}
+
+.cartHeader h2{
+font-size:20px;
+}
+
+.cartItem img{
+width:65px;
+height:65px;
+}
+
+.cartTotal{
+font-size:20px;
+}
+
+.finishBtn{
+padding:14px;
+font-size:15px;
+}
+
+}

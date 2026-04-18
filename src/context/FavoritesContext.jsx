@@ -1,95 +1,42 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const FavoritesContext =
-  createContext();
+const FavoritesContext = createContext();
 
-export function FavoritesProvider({
-  children
-}) {
-  const [favorites, setFavorites] =
-    useState(() => {
-      const saved =
-        localStorage.getItem(
-          "favorites"
-        );
-
-      return saved
-        ? JSON.parse(saved)
-        : [];
-    });
+export function FavoritesProvider({ children }) {
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem(
-      "favorites",
-      JSON.stringify(favorites)
-    );
+    const stored = localStorage.getItem("favorites");
+    if (stored) setFavorites(JSON.parse(stored));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  function addFavorite(product) {
-    const exists =
-      favorites.find(
-        (item) =>
-          item.id === product.id
-      );
-
-    if (exists) return;
-
-    setFavorites([
-      ...favorites,
-      product
-    ]);
-  }
-
-  function removeFavorite(id) {
-    setFavorites(
-      favorites.filter(
-        (item) => item.id !== id
-      )
-    );
-  }
-
   function toggleFavorite(product) {
-    const exists =
-      favorites.find(
-        (item) =>
-          item.id === product.id
-      );
+    setFavorites(prev => {
+      const exists = prev.some(p => p.id === product.id);
 
-    if (exists) {
-      removeFavorite(product.id);
-    } else {
-      addFavorite(product);
-    }
+      if (exists) {
+        return prev.filter(p => p.id !== product.id);
+      } else {
+        return [...prev, product];
+      }
+    });
   }
 
   function isFavorite(id) {
-    return favorites.some(
-      (item) => item.id === id
-    );
+    return favorites.some(p => p.id === id);
   }
 
   return (
-    <FavoritesContext.Provider
-      value={{
-        favorites,
-        addFavorite,
-        removeFavorite,
-        toggleFavorite,
-        isFavorite
-      }}
-    >
+    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
       {children}
     </FavoritesContext.Provider>
   );
 }
 
 export function useFavorites() {
-  return useContext(
-    FavoritesContext
-  );
+  return useContext(FavoritesContext);
 }

@@ -14,16 +14,15 @@ import Home from "./pages/Home";
 import Principal from "./pages/Principal";
 import Header from "./components/Header.jsx";
 import Login from "./pages/Login";
+import Favorites from "./pages/Favorites";
+import Checkout from "./pages/Checkout"; // ✅ ADICIONADO
 
 import PageTransition from "./components/PageTransition.jsx";
 
 import { CartProvider } from "./context/CartContext";
 import { FavoritesProvider } from "./context/FavoritesContext";
 
-function Layout({
-  children,
-  setSearch
-}) {
+function Layout({ children, setSearch }) {
   return (
     <>
       <Header setSearch={setSearch} />
@@ -34,30 +33,17 @@ function Layout({
   );
 }
 
-function AppRoutes({
-  search,
-  setSearch
-}) {
-  const location =
-    useLocation();
+function AppRoutes({ search, setSearch }) {
+  const location = useLocation();
 
   return (
-    <AnimatePresence
-      mode="wait"
-      initial={false}
-    >
-      <Routes
-        location={location}
-        key={location.pathname}
-      >
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+
         <Route
           path="/"
           element={
-            <Layout
-              setSearch={
-                setSearch
-              }
-            >
+            <Layout setSearch={setSearch}>
               <Principal />
             </Layout>
           }
@@ -66,16 +52,8 @@ function AppRoutes({
         <Route
           path="/produtos"
           element={
-            <Layout
-              setSearch={
-                setSearch
-              }
-            >
-              <Home
-                search={
-                  search
-                }
-              />
+            <Layout setSearch={setSearch}>
+              <Home search={search} />
             </Layout>
           }
         />
@@ -83,12 +61,27 @@ function AppRoutes({
         <Route
           path="/product/:id"
           element={
-            <Layout
-              setSearch={
-                setSearch
-              }
-            >
+            <Layout setSearch={setSearch}>
               <Product />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/favoritos"
+          element={
+            <Layout setSearch={setSearch}>
+              <Favorites />
+            </Layout>
+          }
+        />
+
+        {/* ✅ NOVA ROTA CHECKOUT */}
+        <Route
+          path="/checkout"
+          element={
+            <Layout setSearch={setSearch}>
+              <Checkout />
             </Layout>
           }
         />
@@ -104,21 +97,16 @@ function AppRoutes({
 
         <Route
           path="*"
-          element={
-            <Navigate
-              to="/"
-              replace
-            />
-          }
+          element={<Navigate to="/" replace />}
         />
+
       </Routes>
     </AnimatePresence>
   );
 }
 
 function App() {
-  const [search, setSearch] =
-    useState("");
+  const [search, setSearch] = useState("");
 
   return (
     <FavoritesProvider>
@@ -126,9 +114,7 @@ function App() {
         <BrowserRouter>
           <AppRoutes
             search={search}
-            setSearch={
-              setSearch
-            }
+            setSearch={setSearch}
           />
         </BrowserRouter>
       </CartProvider>

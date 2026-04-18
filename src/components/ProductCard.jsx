@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useFavorites } from "../context/FavoritesContext";
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
+
+const favorite = isFavorite(product.id);
 
   const price = product.price;
 
@@ -62,13 +66,20 @@ function ProductCard({ product }) {
 
       </Link>
 
-      <button
-        className="add-cart"
-        onClick={() => addToCart(product)}
-      >
-        Adicionar ao Carrinho
-      </button>
+    {/* FAVORITO */}
+<button
+  onClick={() => toggleFavorite(product)}
+  className={`fav-btn ${favorite ? "active" : ""}`}
+>
+  {favorite ? "❤" : "♡"}
+</button>
 
+<button
+  className="add-cart"
+  onClick={() => addToCart(product)}
+>
+  Adicionar ao Carrinho
+</button>
     </div>
   );
 }

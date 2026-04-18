@@ -1849,6 +1849,7 @@ display:flex;
 align-items:center;
 gap:8px;
 margin-bottom:8px;
+color: #000000;
 }
 
 .qty button{

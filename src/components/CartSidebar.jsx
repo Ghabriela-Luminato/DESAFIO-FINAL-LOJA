@@ -3,6 +3,14 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { applyCoupon } from "../utils/coupon";
 
+/* FORMATAÇÃO BRL */
+function money(value) {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
+
 function CartSidebar() {
   const navigate = useNavigate();
 
@@ -17,19 +25,10 @@ function CartSidebar() {
 
   const [coupon, setCoupon] = useState("");
 
-  /* =========================
-     CEP REAL
-  ========================= */
-
   const cep =
     localStorage.getItem("cep") || "";
 
   const hasCep = cep.length === 9;
-
-  /* =========================
-     REGIÃO PELO CEP
-     (simples / provisório)
-  ========================= */
 
   function getRegionByCep(cep) {
     const inicio = Number(
@@ -39,22 +38,13 @@ function CartSidebar() {
     if (inicio >= 30 && inicio <= 39)
       return "MG";
 
-    if (
-      inicio >= 1 &&
-      inicio <= 29
-    )
+    if (inicio >= 1 && inicio <= 29)
       return "SUDESTE";
 
-    if (
-      inicio >= 40 &&
-      inicio <= 65
-    )
+    if (inicio >= 40 && inicio <= 65)
       return "NORDESTE";
 
-    if (
-      inicio >= 80 &&
-      inicio <= 99
-    )
+    if (inicio >= 80 && inicio <= 99)
       return "SUL";
 
     return "OUTROS";
@@ -63,10 +53,6 @@ function CartSidebar() {
   const region = hasCep
     ? getRegionByCep(cep)
     : "";
-
-  /* =========================
-     FRETE FIXO POR REGIÃO
-  ========================= */
 
   function getShipping(region) {
     switch (region) {
@@ -78,25 +64,25 @@ function CartSidebar() {
 
       case "SUDESTE":
         return {
-          price: 14.90,
+          price: 14.9,
           prazo: "2 a 4 dias"
         };
 
       case "NORDESTE":
         return {
-          price: 24.90,
+          price: 24.9,
           prazo: "5 a 8 dias"
         };
 
       case "SUL":
         return {
-          price: 19.90,
+          price: 19.9,
           prazo: "4 a 7 dias"
         };
 
       default:
         return {
-          price: 29.90,
+          price: 29.9,
           prazo: "6 a 10 dias"
         };
     }
@@ -108,8 +94,6 @@ function CartSidebar() {
         price: 0,
         prazo: "-"
       };
-
-  /* ========================= */
 
   const subtotal = cart.reduce(
     (acc, item) =>
@@ -178,7 +162,7 @@ function CartSidebar() {
                 <h4>{item.title}</h4>
 
                 <p>
-                  R$ {item.price.toFixed(2)}
+                  {money(item.price)}
                 </p>
 
                 <div className="qty">
@@ -204,11 +188,11 @@ function CartSidebar() {
                 </div>
 
                 <small>
-                  Subtotal: R${" "}
-                  {(
+                  Subtotal:{" "}
+                  {money(
                     item.price *
-                    item.quantity
-                  ).toFixed(2)}
+                      item.quantity
+                  )}
                 </small>
 
                 <button
@@ -225,9 +209,6 @@ function CartSidebar() {
 
           <div className="cartFooter">
 
-      
-
-            {/* CUPOM */}
             <div className="couponBox">
               <input
                 placeholder="Cupom"
@@ -248,14 +229,13 @@ function CartSidebar() {
               )}
             </div>
 
-            {/* RESUMO */}
             <div className="cartResume">
               <span>
                 Subtotal
               </span>
 
               <span>
-                R$ {subtotal.toFixed(2)}
+                {money(subtotal)}
               </span>
             </div>
 
@@ -266,9 +246,9 @@ function CartSidebar() {
                 {hasCep
                   ? shipping.price === 0
                     ? "Grátis"
-                    : `R$ ${shipping.price.toFixed(
-                        2
-                      )}`
+                    : money(
+                        shipping.price
+                      )
                   : "--"}
               </span>
             </div>
@@ -281,8 +261,9 @@ function CartSidebar() {
                 </span>
 
                 <span>
-                  - R$ {couponData.discount.toFixed(
-                    2
+                  -{" "}
+                  {money(
+                    couponData.discount
                   )}
                 </span>
               </div>
@@ -292,7 +273,7 @@ function CartSidebar() {
               <span>Total</span>
 
               <span>
-                R$ {total.toFixed(2)}
+                {money(total)}
               </span>
             </div>
 

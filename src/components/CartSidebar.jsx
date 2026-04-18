@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
-
-import { calculateShipping } from "../utils/shipping";
 import { applyCoupon } from "../utils/coupon";
 
 function CartSidebar() {
@@ -18,35 +16,106 @@ function CartSidebar() {
   } = useCart();
 
   const [coupon, setCoupon] = useState("");
-  const [shippingMethod, setShippingMethod] =
-    useState("loggi");
 
-  /* CEP REAL */
+  /* =========================
+     CEP REAL
+  ========================= */
+
   const cep =
     localStorage.getItem("cep") || "";
 
   const hasCep = cep.length === 9;
 
-  const state =
-    cep.startsWith("35") ? "MG" : "OUTRO";
+  /* =========================
+     REGIÃO PELO CEP
+     (simples / provisório)
+  ========================= */
+
+  function getRegionByCep(cep) {
+    const inicio = Number(
+      cep.replace("-", "").slice(0, 2)
+    );
+
+    if (inicio >= 30 && inicio <= 39)
+      return "MG";
+
+    if (
+      inicio >= 1 &&
+      inicio <= 29
+    )
+      return "SUDESTE";
+
+    if (
+      inicio >= 40 &&
+      inicio <= 65
+    )
+      return "NORDESTE";
+
+    if (
+      inicio >= 80 &&
+      inicio <= 99
+    )
+      return "SUL";
+
+    return "OUTROS";
+  }
+
+  const region = hasCep
+    ? getRegionByCep(cep)
+    : "";
+
+  /* =========================
+     FRETE FIXO POR REGIÃO
+  ========================= */
+
+  function getShipping(region) {
+    switch (region) {
+      case "MG":
+        return {
+          price: 0,
+          prazo: "1 a 2 dias"
+        };
+
+      case "SUDESTE":
+        return {
+          price: 14.90,
+          prazo: "2 a 4 dias"
+        };
+
+      case "NORDESTE":
+        return {
+          price: 24.90,
+          prazo: "5 a 8 dias"
+        };
+
+      case "SUL":
+        return {
+          price: 19.90,
+          prazo: "4 a 7 dias"
+        };
+
+      default:
+        return {
+          price: 29.90,
+          prazo: "6 a 10 dias"
+        };
+    }
+  }
+
+  const shipping = hasCep
+    ? getShipping(region)
+    : {
+        price: 0,
+        prazo: "-"
+      };
+
+  /* ========================= */
 
   const subtotal = cart.reduce(
     (acc, item) =>
       acc + item.price * item.quantity,
     0
   );
-
-  /* SEM CEP = SEM TAXA */
-  const shipping = hasCep
-    ? calculateShipping({
-        state,
-        subtotal,
-        method: shippingMethod
-      })
-    : {
-        price: 0,
-        days: "-"
-      };
 
   const couponData = applyCoupon(
     coupon,
@@ -156,54 +225,7 @@ function CartSidebar() {
 
           <div className="cartFooter">
 
-            {/* FRETES */}
-            <div className="shippingOptions">
-
-              <label>
-                <input
-                  type="radio"
-                  checked={
-                    shippingMethod ===
-                    "loggi"
-                  }
-                  onChange={() =>
-                    setShippingMethod(
-                      "loggi"
-                    )
-                  }
-                />
-
-                Loggi
-                <small>
-                  {hasCep
-                    ? "R$ 25,90 • 1 a 2 dias"
-                    : "Informe CEP"}
-                </small>
-              </label>
-
-              <label>
-                <input
-                  type="radio"
-                  checked={
-                    shippingMethod ===
-                    "correios"
-                  }
-                  onChange={() =>
-                    setShippingMethod(
-                      "correios"
-                    )
-                  }
-                />
-
-                Correios
-                <small>
-                  {hasCep
-                    ? "R$ 18,90 • 4 a 7 dias"
-                    : "Informe CEP"}
-                </small>
-              </label>
-
-            </div>
+      
 
             {/* CUPOM */}
             <div className="couponBox">
@@ -242,9 +264,11 @@ function CartSidebar() {
 
               <span>
                 {hasCep
-                  ? `R$ ${shipping.price.toFixed(
-                      2
-                    )}`
+                  ? shipping.price === 0
+                    ? "Grátis"
+                    : `R$ ${shipping.price.toFixed(
+                        2
+                      )}`
                   : "--"}
               </span>
             </div>

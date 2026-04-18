@@ -1972,11 +1972,13 @@ color:#16a34a;
 /* =========================
    RODAPÉ
 ========================= */
-
 .cartFooter{
-margin-top:auto;
-padding-top:22px;
-border-top:2px solid #f2f2f2;
+margin-top:0;
+padding-top:0;
+border-top:none;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
 
 .cartResume{

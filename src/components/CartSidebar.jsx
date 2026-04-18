@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react"; // NOVO
+import { useState } from "react";
 import { useCart } from "../context/CartContext";
 
-// NOVO
 import { calculateShipping } from "../utils/shipping";
 import { applyCoupon } from "../utils/coupon";
 
@@ -18,34 +17,42 @@ function CartSidebar() {
     decrease
   } = useCart();
 
-  // =========================
-  // 🆕 ESTADOS NOVOS
-  // =========================
-  const [coupon, setCoupon] = useState(""); // NOVO
-  const [shippingMethod, setShippingMethod] = useState("correios"); // NOVO
+  const [coupon, setCoupon] = useState("");
+  const [shippingMethod, setShippingMethod] =
+    useState("loggi");
 
-  // 🔥 SIMULAÇÃO (depois você puxa do seu header/context)
-  const state = "MG"; // ALTERADO → aqui você vai conectar com seu CEP real
+  /* CEP REAL */
+  const cep =
+    localStorage.getItem("cep") || "";
 
-  // =========================
-  // 💰 CÁLCULOS
-  // =========================
+  const hasCep = cep.length === 9;
+
+  const state =
+    cep.startsWith("35") ? "MG" : "OUTRO";
+
   const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) =>
+      acc + item.price * item.quantity,
     0
   );
 
-  // NOVO → FRETE INTELIGENTE
-  const shipping = calculateShipping({
-    state,
-    subtotal,
-    method: shippingMethod
-  });
+  /* SEM CEP = SEM TAXA */
+  const shipping = hasCep
+    ? calculateShipping({
+        state,
+        subtotal,
+        method: shippingMethod
+      })
+    : {
+        price: 0,
+        days: "-"
+      };
 
-  // NOVO → CUPOM
-  const couponData = applyCoupon(coupon, subtotal);
+  const couponData = applyCoupon(
+    coupon,
+    subtotal
+  );
 
-  // ALTERADO → TOTAL COM DESCONTO E FRETE
   const total =
     subtotal +
     shipping.price -
@@ -62,15 +69,22 @@ function CartSidebar() {
   }
 
   return (
-    <div className={`cartSidebar ${openCart ? "open" : ""}`}>
-
+    <div
+      className={`cartSidebar ${
+        openCart ? "open" : ""
+      }`}
+    >
       <div className="cartHeader">
         <div>
           <h2>Seu Carrinho</h2>
           <span>{totalItems} itens</span>
         </div>
 
-        <button onClick={() => setOpenCart(false)}>
+        <button
+          onClick={() =>
+            setOpenCart(false)
+          }
+        >
           ✕
         </button>
       </div>
@@ -82,15 +96,16 @@ function CartSidebar() {
       ) : (
         <>
           {cart.map((item) => (
-            <div key={item.id} className="cartItem">
-
+            <div
+              key={item.id}
+              className="cartItem"
+            >
               <img
                 src={item.thumbnail}
                 alt={item.title}
               />
 
               <div className="cartInfo">
-
                 <h4>{item.title}</h4>
 
                 <p>
@@ -98,116 +113,179 @@ function CartSidebar() {
                 </p>
 
                 <div className="qty">
-
-                  <button onClick={() => decrease(item.id)}>
+                  <button
+                    onClick={() =>
+                      decrease(item.id)
+                    }
+                  >
                     -
                   </button>
 
-                  <span>{item.quantity}</span>
+                  <span>
+                    {item.quantity}
+                  </span>
 
-                  <button onClick={() => increase(item.id)}>
+                  <button
+                    onClick={() =>
+                      increase(item.id)
+                    }
+                  >
                     +
                   </button>
-
                 </div>
 
                 <small>
-                  Subtotal: R$ {(item.price * item.quantity).toFixed(2)}
+                  Subtotal: R${" "}
+                  {(
+                    item.price *
+                    item.quantity
+                  ).toFixed(2)}
                 </small>
 
                 <button
                   className="removeBtn"
-                  onClick={() => removeItem(item.id)}
+                  onClick={() =>
+                    removeItem(item.id)
+                  }
                 >
                   remover
                 </button>
-
               </div>
             </div>
           ))}
 
           <div className="cartFooter">
 
-            {/* 🆕 FRETE GRÁTIS MG */}
-            {state === "MG" && (
-              <p className="freeShipping">
-                Frete grátis para MG 🎉
-              </p>
-            )}
-
-            {/* 🆕 ESCOLHA DE ENTREGA */}
+            {/* FRETES */}
             <div className="shippingOptions">
+
               <label>
                 <input
                   type="radio"
-                  checked={shippingMethod === "correios"}
-                  onChange={() => setShippingMethod("correios")}
+                  checked={
+                    shippingMethod ===
+                    "loggi"
+                  }
+                  onChange={() =>
+                    setShippingMethod(
+                      "loggi"
+                    )
+                  }
                 />
-                Correios
+
+                Loggi
+                <small>
+                  {hasCep
+                    ? "R$ 25,90 • 1 a 2 dias"
+                    : "Informe CEP"}
+                </small>
               </label>
 
               <label>
                 <input
                   type="radio"
-                  checked={shippingMethod === "loggi"}
-                  onChange={() => setShippingMethod("loggi")}
+                  checked={
+                    shippingMethod ===
+                    "correios"
+                  }
+                  onChange={() =>
+                    setShippingMethod(
+                      "correios"
+                    )
+                  }
                 />
-                Loggi (rápido)
+
+                Correios
+                <small>
+                  {hasCep
+                    ? "R$ 18,90 • 4 a 7 dias"
+                    : "Informe CEP"}
+                </small>
               </label>
+
             </div>
 
-            {/* 🆕 CUPOM */}
+            {/* CUPOM */}
             <div className="couponBox">
               <input
                 placeholder="Cupom"
                 value={coupon}
-                onChange={(e) => setCoupon(e.target.value)}
+                onChange={(e) =>
+                  setCoupon(
+                    e.target.value
+                  )
+                }
               />
 
               {couponData.message && (
-                <span>{couponData.message}</span>
+                <span>
+                  {
+                    couponData.message
+                  }
+                </span>
               )}
             </div>
 
-            {/* 💰 RESUMO */}
+            {/* RESUMO */}
             <div className="cartResume">
-              <span>Subtotal</span>
-              <span>R$ {subtotal.toFixed(2)}</span>
+              <span>
+                Subtotal
+              </span>
+
+              <span>
+                R$ {subtotal.toFixed(2)}
+              </span>
             </div>
 
             <div className="cartResume">
               <span>Frete</span>
+
               <span>
-                {shipping.price === 0
-                  ? "Grátis"
-                  : `R$ ${shipping.price.toFixed(2)}`}
+                {hasCep
+                  ? `R$ ${shipping.price.toFixed(
+                      2
+                    )}`
+                  : "--"}
               </span>
             </div>
 
-            {/* 🆕 DESCONTO */}
-            {couponData.discount > 0 && (
+            {couponData.discount >
+              0 && (
               <div className="cartResume">
-                <span>Desconto</span>
-                <span>- R$ {couponData.discount.toFixed(2)}</span>
+                <span>
+                  Desconto
+                </span>
+
+                <span>
+                  - R$ {couponData.discount.toFixed(
+                    2
+                  )}
+                </span>
               </div>
             )}
 
             <div className="cartTotal">
               <span>Total</span>
-              <span>R$ {total.toFixed(2)}</span>
+
+              <span>
+                R$ {total.toFixed(2)}
+              </span>
             </div>
 
-            {/* 🆕 CONTINUAR COMPRANDO */}
             <button
               className="continueBtn"
-              onClick={() => setOpenCart(false)}
+              onClick={() =>
+                setOpenCart(false)
+              }
             >
               Continuar comprando
             </button>
 
             <button
               className="finishBtn"
-              onClick={finalizarCompra}
+              onClick={
+                finalizarCompra
+              }
             >
               Finalizar Compra
             </button>
@@ -215,7 +293,6 @@ function CartSidebar() {
           </div>
         </>
       )}
-
     </div>
   );
 }

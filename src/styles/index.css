@@ -1780,7 +1780,6 @@ body.dark .checkout-item-info span {
   color: #666;
 }
 
-/* RESUMO LATERAL */
 .checkout-summary {
  color: #060505;
   border-radius: 12px;
@@ -1789,7 +1788,7 @@ body.dark .checkout-item-info span {
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* LINHAS */
+
 .summary-line {
   display: flex;
   justify-content: space-between;
@@ -1803,9 +1802,10 @@ body.dark .checkout-item-info span {
   margin-top: 15px;
   font-size: 18px;
   font-weight: bold;
+ 
 }
 
-/* BOTÃO */
+
 .pay-button {
   width: 100%;
   margin-top: 20px;
@@ -1824,9 +1824,119 @@ body.dark .checkout-item-info span {
 }
 
 
-/* =========================
-   CARRINHO PREMIUM PRO
-========================= */
+body.dark .favorites-page {
+  padding: 30px;
+  padding-bottom: 120px;
+  background: #020617;
+}
+
+body.dark .favorites-page h2 {
+  margin-bottom: 10px;
+}
+
+
+.fav-top {
+  margin: 20px 0;
+}
+
+body.dark .fav-top button {
+  background: #1a1b1c;
+  color: #fff;
+  border: 1px solid #374151;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+body.dark .fav-top button:hover {
+  background: #374151;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 25px;
+}
+
+
+body.dark .fav-item {
+  position: relative;
+  background: #111827;
+  border-radius: 16px;
+  padding: 12px;
+  transition: 0.2s;
+  border: 1px solid transparent;
+}
+
+body.dark .fav-item:hover {
+  transform: translateY(-5px);
+  border: 1px solid #22c55e;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* checkbox */
+body.dark .fav-checkbox {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+/* barra inferior */
+body.dark .fav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  background: #111827;
+  border-top: 1px solid #1f2937;
+
+  padding: 18px 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+}
+
+body.dark .fav-bar span {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* botão */
+body.dark .fav-bar button {
+  background: #22c55e;
+  color: #022c22;
+
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+body.dark .fav-bar button:hover {
+  background: #16a34a;
+}
+
+body.dark .fav-bar button:disabled {
+  background: #374151;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+
+/* CARRINHO */
 
 .cartSidebar{
 position:fixed;
@@ -1845,15 +1955,13 @@ display:flex;
 flex-direction:column;
 }
 
-/* MELHORADO */
+
 .cartSidebar.open{
 right:0;
 box-shadow:-20px 0 60px rgba(0,0,0,.2);
 }
 
-/* =========================
-   TOPO
-========================= */
+
 
 .cartHeader{
 display:flex;
@@ -1894,9 +2002,6 @@ background:#ececec;
 transform:scale(1.05);
 }
 
-/* =========================
-   CARRINHO VAZIO
-========================= */
 
 .emptyCart{
 text-align:center;
@@ -1906,10 +2011,6 @@ font-weight:600;
 color:#020202;
 }
 
-/* =========================
-   ITEM
-========================= */
-
 .cartItem{
 display:flex;
 gap:14px;
@@ -1918,7 +2019,7 @@ border-bottom:1px solid #f3f3f3;
 transition:.2s; /* NOVO */
 }
 
-/* NOVO (feedback visual) */
+
 .cartItem:hover{
 transform:translateX(-3px);
 }
@@ -1959,9 +2060,7 @@ margin-bottom:10px;
 font-weight:700;
 }
 
-/* =========================
-   QUANTIDADE
-========================= */
+
 
 .qty{
 display:flex;
@@ -1985,9 +2084,8 @@ transition:.2s;
 
 .qty button:hover{
 background:#e6e6e6;
-transform:scale(1.05); /* MELHORADO */
+transform:scale(1.05); 
 }
-
 .qty span{
 min-width:22px;
 text-align:center;
@@ -1995,9 +2093,6 @@ font-size:15px;
 font-weight:900;
 }
 
-/* =========================
-   REMOVER
-========================= */
 
 .removeBtn{
 border:none;
@@ -2013,9 +2108,7 @@ font-weight:800;
 text-decoration:underline;
 }
 
-/* =========================
-   FRETE / CUPOM (NOVO)
-========================= */
+
 
 .freeShipping{
 background:#ecfdf5;
@@ -2028,9 +2121,7 @@ margin-bottom:12px;
 text-align:center;
 }
 
-/* =========================
-   ENTREGA (NOVO)
-========================= */
+
 
 .shippingOptions{
 display:flex;
@@ -2053,14 +2144,11 @@ cursor:pointer;
 transition:.2s;
 }
 
-/* MELHORADO */
+
 .shippingOptions label:hover{
 background:#f1f1f1;
 }
 
-/* =========================
-   CUPOM (NOVO)
-========================= */
 
 .couponBox{
 display:flex;
@@ -2078,7 +2166,7 @@ font-weight:600;
 outline:none;
 }
 
-/* MELHORADO */
+
 .couponBox input:focus{
 border-color:#111;
 }
@@ -2089,9 +2177,7 @@ font-weight:700;
 color:#16a34a;
 }
 
-/* =========================
-   RODAPÉ
-========================= */
+
 .cartFooter{
 margin-top:0;
 padding-top:0;
@@ -2110,7 +2196,7 @@ margin-bottom:10px;
 color:#555;
 }
 
-/* NOVO (desconto visual) */
+
 .cartResume span:last-child{
 font-weight:800;
 }
@@ -2124,11 +2210,7 @@ color:#111;
 margin-top:12px;
 }
 
-/* =========================
-   BOTÕES
-========================= */
 
-/* NOVO */
 .continueBtn{
 margin-top:10px;
 width:100%;
@@ -2147,7 +2229,7 @@ transition:.25s;
 background:#474646;
 }
 
-/* MELHORADO */
+
 .finishBtn{
 margin-top:10px;
 width:100%;
@@ -2167,9 +2249,6 @@ transform:translateY(-2px);
 opacity:.95;
 }
 
-/* =========================
-   HEADER ICON
-========================= */
 
 .cartArea{
 position:relative;
@@ -2196,111 +2275,103 @@ justify-content:center;
 box-shadow:0 4px 8px rgba(255,0,0,.22);
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:768px){
-
-.cartSidebar{
-width:100%;
-right:-100%;
-padding:18px;
-}
-
-.cartItem img{
-width:72px;
-height:72px;
-}
-
-.cartHeader h2{
-font-size:18px;
-}
-
-.cartTotal{
-font-size:22px;
-}
-
-.finishBtn{
-padding:15px;
-font-size:15px;
-}
-
-}
-
-/* PÁGINA */
+/* Favoritos */
 .favorites-page {
-  padding: 20px;
-  padding-bottom: 100px; /* espaço pra barra fixa */
+  padding: 30px;
+  padding-bottom: 120px;
+  background: #f9fafb;
+  color: #111;
 }
 
-/* TOPO */
+.favorites-page h2 {
+  margin-bottom: 10px;
+}
+
+/* topo */
 .fav-top {
-  margin: 15px 0;
+  margin: 20px 0;
 }
 
 .fav-top button {
-  background: #eee;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  background: #ffffff;
+  color: #111;
+  border: 1px solid #ddd;
+  padding: 10px 16px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-/* GRID */
+.fav-top button:hover {
+  background: #f3f4f6;
+}
+
+/* grid */
 .favorites-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 25px;
 }
 
-/* ITEM */
+/* card */
 .fav-item {
   position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px;
+  transition: 0.25s;
+  border: 1px solid #e5e7eb;
 }
 
-/* CHECKBOX */
+.fav-item:hover {
+  transform: translateY(-5px);
+  border-color: #22c55e;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* checkbox */
 .fav-checkbox {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   z-index: 2;
-  transform: scale(1.2);
+  transform: scale(1.3);
   cursor: pointer;
 }
 
-/* BARRA FIXA (ESTILO SHOPEE) */
+/* barra inferior */
 .fav-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
 
-  background: white;
-  border-top: 1px solid #ddd;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
 
-  padding: 15px 20px;
+  padding: 18px 30px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
 }
 
-/* TOTAL */
 .fav-bar span {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #111;
 }
 
-/* BOTÃO COMPRAR */
+/* botão */
 .fav-bar button {
-  background: #014313; /* cor estilo Shopee */
-  color: white;
-  border: none;
+  background: #16a34a;
+  color: #fff;
 
-  padding: 12px 20px;
-  border-radius: 8px;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
 
   font-weight: bold;
   cursor: pointer;
@@ -2309,18 +2380,16 @@ font-size:15px;
 }
 
 .fav-bar button:hover {
-  opacity: 0.9;
+  background: #15803d;
 }
 
 .fav-bar button:disabled {
-  background: #ccc;
+  background: #d1d5db;
+  color: #6b7280;
   cursor: not-allowed;
 }
 
-
-
-
-/* CONTAINER PRINCIPAL */
+/* Checkout */
 .checkout-page {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -2331,7 +2400,6 @@ font-size:15px;
   color: #222;
 }
 
-/* LISTA DE ITENS */
 .checkout-items {
   background: #fff;
   border-radius: 12px;
@@ -2366,7 +2434,7 @@ font-size:15px;
   color: #666;
 }
 
-/* RESUMO LATERAL */
+
 .checkout-summary {
   background: #fff;
   border-radius: 12px;
@@ -2375,7 +2443,7 @@ font-size:15px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* LINHAS */
+
 .summary-line {
   display: flex;
   justify-content: space-between;
@@ -2391,7 +2459,7 @@ font-size:15px;
   font-weight: bold;
 }
 
-/* BOTÃO */
+
 .pay-button {
   width: 100%;
   margin-top: 20px;

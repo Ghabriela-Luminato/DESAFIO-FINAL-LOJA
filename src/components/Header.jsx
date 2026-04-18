@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { getCepData } from "../services/cep";
-
+import { useFavorites } from "../context/FavoritesContext";
 import { useCart } from "../context/CartContext";
 import CartSidebar from "./CartSidebar";
 
 function Header({ setSearch }) {
   const navigate = useNavigate();
+
+  
+  const { favorites } =
+    useFavorites();
+
 
   const { cart, setOpenCart } = useCart();
 
@@ -204,11 +209,22 @@ function Header({ setSearch }) {
         {/* MENU */}
 
         <nav className="menu">
+<div
+  className="cartArea"
+  onClick={() =>
+    navigate("/favoritos")
+  }
+>
+  <i
+    className="fa-regular fa-heart heartIcon"
+  ></i>
 
-          <a href="#">
-            <i className="fa-regular fa-heart heartIcon"></i>
-          </a>
-
+  {favorites.length > 0 && (
+    <span className="cartCount">
+      {favorites.length}
+    </span>
+  )}
+</div>
           {/* CARRINHO */}
 
           <div

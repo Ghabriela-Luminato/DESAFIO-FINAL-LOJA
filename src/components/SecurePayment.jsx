@@ -1,19 +1,21 @@
-import acabatepay from "../assets/acabatepay.png";
+import { FaTruck } from "react-icons/fa";
 
 function SecurePayment() {
   return (
     <div className="secure-container">
+<div className="secure-box frete-secure">
+  <div className="frete">
+    <FaTruck className="truck-icon" />
 
-    
-      <div className="secure-box">
-    
-        <div className="pagamento">
-          <img src={acabatepay} alt="Acabate Pay" />
-          <span className="pay-text">Pagamento seguro via Acabate Pay</span>
-        </div>
-      </div>
+    <span className="frete-title">Frete Grátis</span>
 
-     
+    <p className="frete-text">
+      Disponível para entregas em Minas Gerais
+    </p>
+  </div>
+</div>
+
+
       <div className="secure-box">
         <h3>Compra 100% segura</h3>
 

@@ -1293,6 +1293,43 @@ color: #000;
 
 /*__________________________________________________________________________*/
 
+/* CARD PEQUENO E ELEGANTE */
+.frete-secure {
+  display: inline-block;              /* 👈 não ocupa tudo */
+  background: #f0fdf4;                /* 👈 fundo suave */
+  padding: 12px 16px;
+  border-radius: 14px;
+}
+
+/* layout vertical */
+.frete-secure .frete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+/* ícone */
+.frete-secure .truck-icon {
+  font-size: 26px;
+  color: #16a34a;
+}
+
+/* título */
+.frete-secure .frete-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #166534;
+}
+
+/* texto */
+.frete-secure .frete-text {
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0;
+  max-width: 220px;
+}
 
 /* FORMAS DE PAGAMENTO */
 .pagamento {
@@ -1396,6 +1433,26 @@ main {
 /*__________________________________________________________________________*/
 
 /*  DARK MODE */
+
+.dark .frete-secure {
+  background: #111827;
+}
+
+.dark .frete-secure .frete-title {
+  color: #e5e7eb;
+}
+
+.dark .frete-secure .frete-text {
+  color: #9ca3af;
+}
+
+.dark .frete-secure .truck-icon {
+  color: #22c55e;
+}
+
+
+
+
 
 body.dark {
   background: #020617;

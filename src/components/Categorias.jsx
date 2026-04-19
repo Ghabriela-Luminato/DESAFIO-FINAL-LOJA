@@ -9,11 +9,11 @@ import ele6 from "../assets/ele6.png";
 export default function Categorias() {
   const categorias = [
     {
-      nome: "Eletrônicos",
-      img: ele1,
+  nome: "Eletrônicos",
+  img: ele1,
+  to: "/produtos?cat=eletronicos",
+},
 
-      to: "/produtos?cat=smartphones",
-    },
     {
       nome: "Celulares",
       img: ele2,
@@ -44,7 +44,7 @@ export default function Categorias() {
   return (
     <section className="categorias-wrapper">
       <h2 className="titulo-categorias">
-        🛍️ Explore por categorias
+       Explore nossas categorias
       </h2>
 
       <div className="categorias-grid">

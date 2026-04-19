@@ -7,6 +7,18 @@ function DailyDeals({ products }) {
   useEffect(() => {
     if (!products || products.length === 0) return;
 
+  
+    const hoje = new Date().toISOString().split("T")[0];
+
+  
+    const ofertasSalvas = localStorage.getItem("dailyDeals");
+    const dataSalva = localStorage.getItem("dailyDealsDate");
+
+    if (ofertasSalvas && dataSalva === hoje) {
+      setDeals(JSON.parse(ofertasSalvas));
+      return;
+    }
+
     const categorias = [
       "smartphones",
       "laptops",
@@ -17,7 +29,6 @@ function DailyDeals({ products }) {
 
     let selecionados = [];
 
-    
     categorias.forEach((cat) => {
       const lista = products.filter(
         (p) =>
@@ -33,12 +44,15 @@ function DailyDeals({ products }) {
       }
     });
 
-    
     const final = selecionados
       .sort(() => Math.random() - 0.5)
       .slice(0, 4);
 
     setDeals(final);
+
+    // 🔥 salva no navegador até mudar o dia
+    localStorage.setItem("dailyDeals", JSON.stringify(final));
+    localStorage.setItem("dailyDealsDate", hoje);
 
   }, [products]);
 

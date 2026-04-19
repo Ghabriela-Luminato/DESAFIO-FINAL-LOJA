@@ -10,7 +10,8 @@ import Reviews from "../components/Reviews.jsx";
 import SecurePayment from "../components/SecurePayment.jsx";
 import Footer from "../components/Footer.jsx";
 
-function Principal() {
+
+function Principal({ search }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,6 +44,16 @@ function Principal() {
     };
   }, []);
 
+
+  const filteredProducts = products.filter(product => {
+    const text = search?.toLowerCase() || "";
+
+    return (
+      product.title.toLowerCase().includes(text) ||
+      product.description?.toLowerCase().includes(text)
+    );
+  });
+
   return (
     <PageTransition>
       <>
@@ -58,7 +69,6 @@ function Principal() {
               </button>
             </Link>
 
-            
             <Link to="/produtos?cat=smartphones">
               <button>
                 <i className="fa-solid fa-mobile-screen"></i>
@@ -89,13 +99,12 @@ function Principal() {
 
             <Link to="/produtos?cat=skincare">
               <button>
-             <i className="fa-solid fa-wand-magic-sparkles"></i>
+                <i className="fa-solid fa-wand-magic-sparkles"></i>
                 Beleza
               </button>
             </Link>
 
-            
-           <Link to="/produtos?cat=home-decoration">
+            <Link to="/produtos?cat=home-decoration">
               <button>
                 <i className="fa-solid fa-couch"></i>
                 Casa
@@ -104,31 +113,32 @@ function Principal() {
 
           </div>
 
-          {/* 🔹 CARROSSEL */}
+          {/*  CARROSSEL */}
           <div className="carousel-wrapper">
             <Carousel />
           </div>
 
-          {/* 🔹 OFERTAS */}
-          <DailyDeals products={products} />
+          {/* OFERTAS */}
+          
+          <DailyDeals products={filteredProducts} />
 
-          {/* 🔹 CATEGORIAS */}
+          {/* CATEGORIAS */}
           <Categorias />
 
-          {/* 🔹 AVALIAÇÕES */}
+          {/* AVALIAÇÕES */}
           <Reviews />
 
-          {/* 🔹 PAGAMENTO */}
+          {/* PAGAMENTO */}
           <SecurePayment />
 
-          {/* 🔹 LOADING */}
+          {/*  LOADING */}
           {loading && (
             <p style={{ textAlign: "center", fontSize: "14px", opacity: 0.7 }}>
               Carregando...
             </p>
           )}
 
-          {/* 🔹 ERRO */}
+          {/* ERRO */}
           {error && (
             <p style={{ textAlign: "center", color: "red" }}>
               Erro ao carregar produtos

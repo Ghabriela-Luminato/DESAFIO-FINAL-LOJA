@@ -61,11 +61,10 @@ function Home({ search }) {
     const title = product.title?.toLowerCase() || "";
 
     const searchText = search?.toLowerCase().trim() || "";
-
-    const matchSearch =
-      title.includes(searchText) ||
-      product.description?.toLowerCase().includes(searchText);
-
+const matchSearch =
+  !searchText ||
+  title.includes(searchText) ||
+  product.description?.toLowerCase().includes(searchText);
  
     const bloqueados = [
       "groceries",
@@ -92,32 +91,32 @@ function Home({ search }) {
       ) && matchSearch;
     }
 
-    // 📱 CELULARES
+    //  CELULARES
     if (category === "smartphones") {
       return cat === "smartphones" && matchSearch;
     }
 
-    // 💻 NOTEBOOKS
+    //  NOTEBOOKS
     if (category === "laptops") {
       return cat === "laptops" && matchSearch;
     }
 
-    // 🔌 ELETRÔNICOS (ALEXA + FONE + CABO)
+    //  ELETRÔNICOS 
     if (category === "eletronicos") {
       return isEletronico(product) && matchSearch;
     }
 
-    // 💄 SKINCARE
+    //  SKINCARE
     if (category === "skincare") {
       return (cat === "skincare" || cat === "beauty") && matchSearch;
     }
 
-    // 🌸 PERFUMES
+    //  PERFUMES
     if (category === "fragrances") {
       return cat === "fragrances" && matchSearch;
     }
 
-    // 🏠 CASA
+    //  CASA
     if (category === "home-decoration") {
       return (cat === "home-decoration" || cat === "furniture") && matchSearch;
     }
@@ -128,7 +127,7 @@ function Home({ search }) {
   return (
     <div>
 
-      {/* 🔹 FILTROS */}
+      {/* FILTROS */}
       <div className="filters">
 
         <button onClick={() => setCategory("all")} className={category==="all"?"active":""}>
@@ -168,7 +167,7 @@ function Home({ search }) {
 
       </div>
 
-       {/* 🔹 GRID */}
+       {/*  GRID */}
       <div className="grid">
         {!loading &&
           filteredProducts.map((product) => (
@@ -176,14 +175,13 @@ function Home({ search }) {
           ))}
       </div>
 
-      {/* 🔹 LOADING */}
+      {/*  LOADING */}
       {loading && (
         <p style={{ textAlign: "center", marginTop: "10px" }}>
           Carregando...
         </p>
       )}
 
-      {/* 🔹 SEM RESULTADO (SÓ NA BUSCA) */}
       {!loading && filteredProducts.length === 0 && search && (
         <p style={{ textAlign: "center", marginTop: "10px" }}>
           Nenhum resultado para "{search}"

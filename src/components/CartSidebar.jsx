@@ -3,6 +3,28 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { applyCoupon } from "../utils/coupon";
 
+function getShippingByCep(cep) {
+  const inicio = Number(cep.replace("-", "").slice(0, 2));
+
+  if (inicio >= 30 && inicio <= 39) {
+    return { price: 0 };
+  }
+
+  if (inicio >= 1 && inicio <= 29) {
+    return { price: 14.9 };
+  }
+
+  if (inicio >= 40 && inicio <= 65) {
+    return { price: 24.9 };
+  }
+
+  if (inicio >= 80 && inicio <= 99) {
+    return { price: 19.9 };
+  }
+
+  return { price: 29.9 };
+}
+
 function money(value) {
   return value.toLocaleString("pt-BR", {
     style: "currency",
@@ -56,8 +78,8 @@ function CartSidebar() {
   }
 
   const shipping = hasCep
-    ? getShipping(region)
-    : { price: 0, prazo: "-" };
+    ? getShippingByCep(cep)
+    : null;
 
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -67,35 +89,41 @@ function CartSidebar() {
   const couponData = applyCoupon(coupon, subtotal);
 
   const total =
-    subtotal + shipping.price - couponData.discount;
+    subtotal + (hasCep ? shipping.price : 0) - couponData.discount;
 
   const totalItems = cart.reduce(
     (acc, item) => acc + item.quantity,
     0
   );
 
-  // ✅ CORREÇÃO AQUI
-  function finalizarCompra() {
-    const data = {
-      cart,
-      subtotal,
-      shipping,
-      coupon: couponData,
-      total
-    };
+ function finalizarCompra() {
+  const user = localStorage.getItem("loggedUser"); 
 
-    localStorage.setItem(
-      "checkoutData",
-      JSON.stringify(data)
-    );
-
-    setOpenCart(false);
-
-    navigate("/checkout", {
-      state: data
-    });
+  if (!user) {
+    alert("Você precisa estar logado para finalizar a compra!");
+    navigate("/login");
+    return;
   }
 
+  const data = {
+    cart,
+    subtotal,
+    shipping,
+    coupon: couponData,
+    total
+  };
+
+  localStorage.setItem(
+    "checkoutData",
+    JSON.stringify(data)
+  );
+
+  setOpenCart(false);
+
+  navigate("/checkout", {
+    state: data
+  });
+}
   return (
     <div className={`cartSidebar ${openCart ? "open" : ""}`}>
       <div className="cartHeader">
@@ -164,9 +192,9 @@ function CartSidebar() {
               <span>Frete</span>
               <span>
                 {hasCep
-                  ? shipping.price === 0
+                  ? shipping?.price === 0
                     ? "Grátis"
-                    : money(shipping.price)
+                    : money(shipping?.price || 0)
                   : "--"}
               </span>
             </div>
@@ -184,18 +212,19 @@ function CartSidebar() {
             </div>
 
             <button
+              className="finishBtn"
+              onClick={finalizarCompra}
+            >
+              Finalizar Compra
+            </button>
+
+            <button
               className="continueBtn"
               onClick={() => setOpenCart(false)}
             >
               Continuar comprando
             </button>
 
-            <button
-              className="finishBtn"
-              onClick={finalizarCompra}
-            >
-              Finalizar Compra
-            </button>
           </div>
         </>
       )}

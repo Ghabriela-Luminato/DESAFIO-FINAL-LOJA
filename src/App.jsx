@@ -15,7 +15,7 @@ import Principal from "./pages/Principal";
 import Header from "./components/Header.jsx";
 import Login from "./pages/Login";
 import Favorites from "./pages/Favorites";
-import Checkout from "./pages/Checkout"; // ✅ ADICIONADO
+import Checkout from "./pages/Checkout"; 
 
 import PageTransition from "./components/PageTransition.jsx";
 
@@ -40,15 +40,14 @@ function AppRoutes({ search, setSearch }) {
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={location.pathname}>
 
-        <Route
-          path="/"
-          element={
-            <Layout setSearch={setSearch}>
-              <Principal />
-            </Layout>
-          }
-        />
-
+       <Route
+  path="/"
+  element={
+    <Layout setSearch={setSearch}>
+      <Principal search={search} />
+    </Layout>
+  }
+/>
         <Route
           path="/produtos"
           element={

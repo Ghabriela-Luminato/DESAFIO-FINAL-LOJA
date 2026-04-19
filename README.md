@@ -82,7 +82,6 @@ src/
 ├── assets/        # Imagens, logos e identidade visual
 ├── components/    # Componentes reutilizáveis (Header, Card, Sidebar etc)
 ├── context/       # Context API global (Carrinho, usuário, tema...)
-├── hooks/         # Hooks customizados (useCart, useTheme...)
 ├── pages/         # Páginas do sistema
 ├── services/      # Consumo de API e integrações externas
 ├── styles/        # Estilos globais / CSS principal

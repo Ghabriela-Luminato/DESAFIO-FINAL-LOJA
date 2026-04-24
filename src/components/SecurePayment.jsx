@@ -1,20 +1,26 @@
 import { FaTruck } from "react-icons/fa";
+import payments from "../assets/cartoes.png";
 
 function SecurePayment() {
   return (
     <div className="secure-container">
-<div className="secure-box frete-secure">
-  <div className="frete">
-    <FaTruck className="truck-icon" />
 
-    <span className="frete-title">Frete Grátis</span>
+      <div className="secure-box frete-secure">
+        <div className="frete">
+          
+        
+          <span className="frete-title">Formas de pagamento</span>
 
-    <p className="frete-text">
-      Disponível para entregas em Minas Gerais
-    </p>
-  </div>
-</div>
+    
 
+          <img
+            src={payments}
+            alt="Formas de pagamento"
+            className="payments-img"
+          />
+
+        </div>
+      </div>
 
       <div className="secure-box">
         <h3>Compra 100% segura</h3>

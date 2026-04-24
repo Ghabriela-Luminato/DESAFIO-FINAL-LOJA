@@ -17,35 +17,57 @@ export function CartProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // 🔥 NORMALIZA PREÇO
+  function normalizePrice(price) {
+    if (typeof price === "string") {
+      return Number(
+        price
+          .replace("R$", "")
+          .replace(/\./g, "")
+          .replace(",", ".")
+          .trim()
+      ) || 0;
+    }
+    return Number(price) || 0;
+  }
 
+  // ✅ ADD CORRIGIDO
   function addToCart(product) {
     setCart((prev) => {
       const exists = prev.find(item => item.id === product.id);
+
+      const quantityToAdd = product.quantity || 1;
 
       if (exists) {
         return prev.map(item =>
           item.id === product.id
             ? {
                 ...item,
-                quantity: (item.quantity || 1) + 1 // 🔥 nunca quebra
+                quantity: (item.quantity || 1) + quantityToAdd
               }
             : item
         );
       }
 
-      
-      return [...prev, { ...product, quantity: 1 }];
+      return [
+        ...prev,
+        {
+          ...product,
+          quantity: quantityToAdd,
+          price: normalizePrice(product.price) // 🔥 evita NaN
+        }
+      ];
     });
 
     setOpenCart(true);
   }
 
-
+  // ✅ REMOVER
   function removeItem(id) {
     setCart(prev => prev.filter(item => item.id !== id));
   }
 
- 
+  // ✅ AUMENTAR
   function increase(id) {
     setCart(prev =>
       prev.map(item =>
@@ -56,7 +78,7 @@ export function CartProvider({ children }) {
     );
   }
 
-
+  // ✅ DIMINUIR
   function decrease(id) {
     setCart(prev =>
       prev
@@ -69,11 +91,13 @@ export function CartProvider({ children }) {
     );
   }
 
-  const total = cart.reduce(
-    (acc, item) =>
-      acc + (Number(item.price) || 0) * (item.quantity || 1),
-    0
-  );
+  // 🔥 TOTAL SEGURO
+  const total = cart.reduce((acc, item) => {
+    const price = normalizePrice(item.price);
+    const quantity = item.quantity || 1;
+
+    return acc + price * quantity;
+  }, 0);
 
   return (
     <CartContext.Provider

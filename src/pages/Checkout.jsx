@@ -17,6 +17,7 @@ function Checkout() {
 
   const { cart, subtotal, shipping, coupon, total } = state;
 
+ 
   const [updatedShipping, setUpdatedShipping] = useState(
     localStorage.getItem("shipping")
       ? JSON.parse(localStorage.getItem("shipping"))
@@ -34,17 +35,18 @@ function Checkout() {
   const [uf, setUf] = useState("");
   const [paying, setPaying] = useState(false);
 
+ 
   useEffect(() => {
     const interval = setInterval(() => {
       const novoCep = localStorage.getItem("cep") || "";
       const novoFrete = localStorage.getItem("shipping");
 
-      if (novoCep !== cep) setCep(novoCep);
+      if (novoCep !== cep) {
+        setCep(novoCep);
+      }
 
       if (novoFrete) {
         setUpdatedShipping(JSON.parse(novoFrete));
-      } else {
-        setUpdatedShipping(null);
       }
     }, 500);
 
@@ -63,7 +65,7 @@ function Checkout() {
         setUf(data.uf);
       }
     } catch {
-      console.log("Erro ao buscar CEP");
+      console.log("Erro CEP");
     }
   }
 
@@ -104,7 +106,7 @@ function Checkout() {
     }
 
     if (!savedAddress) {
-      alert("Salve o endereço primeiro.");
+      alert("Salve o endereço primeiro");
       return;
     }
 
@@ -130,11 +132,11 @@ function Checkout() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert("Erro ao gerar pagamento.");
+        alert("Erro ao gerar pagamento");
       }
 
     } catch {
-      alert("Erro ao iniciar pagamento.");
+      alert("Erro ao iniciar pagamento");
     } finally {
       setPaying(false);
     }
@@ -194,20 +196,6 @@ function Checkout() {
             <span>{money(total)}</span>
           </div>
 
-          {!updatedShipping && (
-            <p
-              style={{
-                color: "#e53935",
-                fontSize: "14px",
-                marginTop: "10px",
-                fontWeight: "600",
-                textAlign: "center"
-              }}
-            >
-              Informe o CEP para liberar o pagamento.
-            </p>
-          )}
-
           <button
             className="pay-button"
             onClick={pagar}
@@ -249,6 +237,7 @@ function Checkout() {
             </>
           ) : (
             <div className="saved-address">
+
               <div className="summary-line">
                 <span>Endereço</span>
                 <span>{address}, {number}</span>
@@ -260,6 +249,7 @@ function Checkout() {
               >
                 Editar
               </button>
+
             </div>
           )}
 

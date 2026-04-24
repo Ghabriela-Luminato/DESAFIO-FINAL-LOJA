@@ -4,6 +4,7 @@
 
 ![Home](./src/assets/home1.png)
 ![Home](./src/assets/home2.png)
+![Home](./src/assets/home3.png)
 
 Projeto desenvolvido como **Desafio Final do Projeto Desenvolve Itabira (Frontend)**.
 

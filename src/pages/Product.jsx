@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById } from "../services/api";
 import { useCart } from "../context/CartContext";
 
 function Product() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { addToCart } = useCart();
 
@@ -24,8 +25,15 @@ function Product() {
     loadProduct();
   }, [id]);
 
-  const homens = ["Carlos","Marcos","Lucas","Rafael","Bruno","Gustavo","Felipe","Leonardo","Matheus","Thiago"];
-  const mulheres = ["Ana","Juliana","Fernanda","Patrícia","Camila","Sofia","Isabela","Maria","Larissa","Beatriz"];
+  const homens = [
+    "Carlos","Marcos","Lucas","Rafael","Bruno",
+    "Gustavo","Felipe","Leonardo","Matheus","Thiago"
+  ];
+
+  const mulheres = [
+    "Ana","Juliana","Fernanda","Patrícia","Camila",
+    "Sofia","Isabela","Maria","Larissa","Beatriz"
+  ];
 
   const comentarios = [
     "Produto excelente, recomendo!",
@@ -56,7 +64,9 @@ function Product() {
         nome,
         nota,
         comentario,
-        foto: `https://randomuser.me/api/portraits/${isHomem ? "men" : "women"}/${fotoId}.jpg`
+        foto: `https://randomuser.me/api/portraits/${
+          isHomem ? "men" : "women"
+        }/${fotoId}.jpg`
       };
     });
   }
@@ -75,10 +85,18 @@ function Product() {
     }
   }
 
+  
   function adicionarCarrinho() {
-    for (let i = 0; i < quantidade; i++) {
-      addToCart(product);
-    }
+    addToCart({
+      ...product,
+      quantity: quantidade
+    });
+  }
+
+
+  function comprarAgora() {
+    adicionarCarrinho();
+    navigate("/cart");
   }
 
   if (!product) return <p>Carregando...</p>;
@@ -134,7 +152,7 @@ function Product() {
 
             <button
               className="buy"
-              onClick={adicionarCarrinho}
+              onClick={comprarAgora}
             >
               Comprar agora
             </button>

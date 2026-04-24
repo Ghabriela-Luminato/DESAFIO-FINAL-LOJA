@@ -17,34 +17,39 @@ function Checkout() {
 
   const { cart, subtotal, shipping, coupon, total } = state;
 
-  const savedShipping = localStorage.getItem("shipping");
-  const updatedShipping = savedShipping
-    ? JSON.parse(savedShipping)
-    : shipping;
+  const [updatedShipping, setUpdatedShipping] = useState(
+    localStorage.getItem("shipping")
+      ? JSON.parse(localStorage.getItem("shipping"))
+      : shipping
+  );
 
-  // 🔹 ENDEREÇO
   const [address, setAddress] = useState(localStorage.getItem("address") || "");
   const [number, setNumber] = useState(localStorage.getItem("number") || "");
   const [savedAddress, setSavedAddress] = useState(
     localStorage.getItem("address") && localStorage.getItem("number")
   );
 
-  function salvarEndereco() {
-    if (!address || !number) {
-      alert("Preencha endereço e número");
-      return;
-    }
-
-    localStorage.setItem("address", address);
-    localStorage.setItem("number", number);
-    setSavedAddress(true);
-  }
-
-
-  const cep = localStorage.getItem("cep") || "";
-
+  const [cep, setCep] = useState(localStorage.getItem("cep") || "");
   const [city, setCity] = useState("");
   const [uf, setUf] = useState("");
+  const [paying, setPaying] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const novoCep = localStorage.getItem("cep") || "";
+      const novoFrete = localStorage.getItem("shipping");
+
+      if (novoCep !== cep) setCep(novoCep);
+
+      if (novoFrete) {
+        setUpdatedShipping(JSON.parse(novoFrete));
+      } else {
+        setUpdatedShipping(null);
+      }
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, [cep]);
 
   async function buscarCep() {
     if (!cep) return;
@@ -57,8 +62,8 @@ function Checkout() {
         setCity(data.localidade);
         setUf(data.uf);
       }
-    } catch (err) {
-      console.error("Erro ao buscar CEP");
+    } catch {
+      console.log("Erro ao buscar CEP");
     }
   }
 
@@ -66,17 +71,24 @@ function Checkout() {
     buscarCep();
   }, [cep]);
 
+  function salvarEndereco() {
+    if (!address || !number) {
+      alert("Preencha endereço e número");
+      return;
+    }
+
+    localStorage.setItem("address", address);
+    localStorage.setItem("number", number);
+    setSavedAddress(true);
+  }
 
   function getPrazo(uf) {
     if (uf === "MG") return "1 a 2 dias";
     if (["SP", "RJ", "ES"].includes(uf)) return "2 a 4 dias";
     if (["BA", "PE", "CE"].includes(uf)) return "5 a 8 dias";
     if (["PR", "SC", "RS"].includes(uf)) return "4 a 7 dias";
-
     return "6 a 10 dias";
   }
-
-  const prazo = uf ? getPrazo(uf) : null;
 
   function money(v) {
     return v.toLocaleString("pt-BR", {
@@ -86,32 +98,51 @@ function Checkout() {
   }
 
   async function pagar() {
-    if (!savedAddress) {
-      alert("Salve o endereço primeiro");
+    if (!updatedShipping) {
+      alert("Calcule o frete antes de pagar.");
       return;
     }
 
+    if (!savedAddress) {
+      alert("Salve o endereço primeiro.");
+      return;
+    }
+
+    setPaying(true);
+
     try {
-      const data = await createPayment({
-        cart,
-        total,
-        shipping: updatedShipping?.price || 0,
-        discount: coupon?.discount || 0,
-        address,
-        number
+      const res = await fetch("http://localhost:3000/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          items: cart.map(item => ({
+            title: item.title,
+            price: Number(item.price),
+            quantity: Number(item.quantity || 1)
+          }))
+        })
       });
 
-      window.location.href = data.checkoutUrl;
-    } catch (err) {
-      console.error(err);
-      alert("Erro ao iniciar pagamento");
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Erro ao gerar pagamento.");
+      }
+
+    } catch {
+      alert("Erro ao iniciar pagamento.");
+    } finally {
+      setPaying(false);
     }
   }
 
   return (
     <div className="checkout-page">
 
-      {/* PRODUTOS */}
       <div className="checkout-items">
         <h2>Produtos</h2>
 
@@ -122,16 +153,16 @@ function Checkout() {
             <div>
               <h4>{item.title}</h4>
               <span>Qtd: {item.quantity}</span>
-              <p><strong>{money(item.price * item.quantity)}</strong></p>
+              <p>
+                <strong>{money(item.price * item.quantity)}</strong>
+              </p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* DIREITA */}
       <div className="checkout-right">
 
-        {/* RESUMO */}
         <div className="checkout-summary">
           <h3>Resumo</h3>
 
@@ -143,11 +174,11 @@ function Checkout() {
           <div className="summary-line">
             <span>Frete</span>
             <span>
-              {!shipping
+              {!updatedShipping
                 ? "--"
-                : shipping.price === 0
+                : updatedShipping.price === 0
                 ? "Grátis"
-                : money(shipping.price)}
+                : money(updatedShipping.price)}
             </span>
           </div>
 
@@ -163,16 +194,29 @@ function Checkout() {
             <span>{money(total)}</span>
           </div>
 
+          {!updatedShipping && (
+            <p
+              style={{
+                color: "#e53935",
+                fontSize: "14px",
+                marginTop: "10px",
+                fontWeight: "600",
+                textAlign: "center"
+              }}
+            >
+              Informe o CEP para liberar o pagamento.
+            </p>
+          )}
+
           <button
             className="pay-button"
             onClick={pagar}
-            disabled={!savedAddress}
+            disabled={!savedAddress || !updatedShipping || paying}
           >
-            Pagar
+            {paying ? "Processando..." : "Pagar"}
           </button>
         </div>
 
-        {/* ENTREGA */}
         <div className="checkout-shipping">
           <h3>Entrega</h3>
 
@@ -196,7 +240,10 @@ function Checkout() {
                 />
               </div>
 
-              <button className="save-address" onClick={salvarEndereco}>
+              <button
+                className="save-address"
+                onClick={salvarEndereco}
+              >
                 Salvar endereço
               </button>
             </>
@@ -221,7 +268,6 @@ function Checkout() {
             <span>{cep || "--"}</span>
           </div>
 
-         
           <div className="summary-line">
             <span>Cidade</span>
             <span>{city ? `${city} - ${uf}` : "--"}</span>
@@ -229,11 +275,13 @@ function Checkout() {
 
           <div className="summary-line">
             <span>Prazo</span>
-            <span>{prazo || "--"}</span>
+            <span>{uf ? getPrazo(uf) : "--"}</span>
           </div>
+
         </div>
 
       </div>
+
     </div>
   );
 }

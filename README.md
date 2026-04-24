@@ -1,5 +1,10 @@
 # Panda Store
 
+## 📸 Preview
+
+![Home](./src/assets/home1.png)
+![Home](./src/assets/home2.png)
+
 Projeto desenvolvido como **Desafio Final do Projeto Desenvolve Itabira (Frontend)**.
 
 A proposta foi criar uma loja virtual consumindo dados de uma API externa, aplicando conceitos de React, organização de componentes e boas práticas de desenvolvimento.

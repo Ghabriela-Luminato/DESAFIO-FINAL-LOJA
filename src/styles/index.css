@@ -1307,33 +1307,36 @@ color: #000;
 /*__________________________________________________________________________*/
 
 /* container dos pagamentos */
-/* TÍTULO */
 .frete-title {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
-  color: #222;
+  color: #333;
 
-  text-align: center;
-
-  margin-top: 12px;   /* 🔥 adiciona isso */
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
-/* IMAGEM */
-.payments-img {
-  max-width: 300px;
+
+
+
+/* IMAGEM DOS CARTÕES */
+.cartoes-img {
   width: 100%;
+  max-width: 350px;
+
+  object-fit: contain;
 
   display: block;
   margin: 0 auto;
 
-  opacity: 0.95;
   transition: transform 0.2s ease;
 }
 
-/* hover leve */
-.payments-img:hover {
-  transform: scale(1.04);
+/* leve interação só */
+.cartoes-img:hover {
+  transform: scale(1.03);
 }
 /*__________________________________________________________________________*/
 
@@ -1476,9 +1479,6 @@ body.dark .checkout-shipping .summary-line span:last-child {
 body.dark .checkout-shipping:hover {
   transform: translateY(-2px);
   transition: 0.2s;
-}
-.dark .frete-secure {
-  background: #111827;
 }
 
 .dark .frete-secure .frete-title {

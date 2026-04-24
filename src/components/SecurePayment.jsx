@@ -6,7 +6,7 @@ function SecurePayment() {
     <div className="secure-container">
 
       <div className="secure-box frete-secure">
-        <div className="frete">
+        <div className="frete-seguranca">
           
         
           <span className="frete-title">Formas de pagamento</span>
@@ -16,7 +16,7 @@ function SecurePayment() {
           <img
             src={payments}
             alt="Formas de pagamento"
-            className="payments-img"
+            className="cartoes-img"
           />
 
         </div>

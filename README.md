@@ -1,6 +1,6 @@
 # Panda Store
 
-## 📸 Preview
+## Preview
 
 ![Home](./src/assets/home1.png)
 ![Home](./src/assets/home2.png)

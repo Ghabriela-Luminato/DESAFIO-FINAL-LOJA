@@ -87,6 +87,13 @@ src/
 ├── styles/        # Estilos globais / CSS principal
 ├── App.jsx        # Rotas principais da aplicação
 ├── main.jsx       # Inicialização React + Vite
+
+backend/
+├── .env                # Variáveis de ambiente (chaves da API, configs)
+├── server.js           # Servidor principal (rotas e inicialização)
+├── package.json        # Dependências e scripts do backend
+├── package-lock.json   # Controle de versões das dependências
+
 ```
 
 ---

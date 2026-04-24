@@ -4,7 +4,11 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
-    return JSON.parse(localStorage.getItem("cart")) || [];
+    try {
+      return JSON.parse(localStorage.getItem("cart")) || [];
+    } catch {
+      return [];
+    }
   });
 
   const [openCart, setOpenCart] = useState(false);
@@ -23,13 +27,14 @@ export function CartProvider({ children }) {
           item.id === product.id
             ? {
                 ...item,
-                quantity: item.quantity + product.quantity
+                quantity: (item.quantity || 1) + 1 // 🔥 nunca quebra
               }
             : item
         );
       }
 
-      return [...prev, product];
+      
+      return [...prev, { ...product, quantity: 1 }];
     });
 
     setOpenCart(true);
@@ -40,12 +45,12 @@ export function CartProvider({ children }) {
     setCart(prev => prev.filter(item => item.id !== id));
   }
 
-
+ 
   function increase(id) {
     setCart(prev =>
       prev.map(item =>
         item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
+          ? { ...item, quantity: (item.quantity || 1) + 1 }
           : item
       )
     );
@@ -57,12 +62,18 @@ export function CartProvider({ children }) {
       prev
         .map(item =>
           item.id === id
-            ? { ...item, quantity: item.quantity - 1 }
+            ? { ...item, quantity: (item.quantity || 1) - 1 }
             : item
         )
         .filter(item => item.quantity > 0)
     );
   }
+
+  const total = cart.reduce(
+    (acc, item) =>
+      acc + (Number(item.price) || 0) * (item.quantity || 1),
+    0
+  );
 
   return (
     <CartContext.Provider
@@ -72,6 +83,7 @@ export function CartProvider({ children }) {
         removeItem,
         increase,
         decrease,
+        total,
         openCart,
         setOpenCart
       }}
